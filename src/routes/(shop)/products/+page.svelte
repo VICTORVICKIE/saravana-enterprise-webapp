@@ -1,0 +1,1 @@
+<h1 class="text-3xl flex my-auto justify-center font-bold">Product Page</h1>
