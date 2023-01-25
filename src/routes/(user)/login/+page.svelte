@@ -1,37 +1,41 @@
-<div class="flex justify-center flex-1 bg-base-200">
-	<div class="hero-content flex-col lg:flex-row-reverse">
-		<div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-			<div class="card-body">
-				<!-- svelte-ignore a11y-label-has-associated-control -->
-				<form method="POST" action="?/login">
-					<div class="form-control">
-						<label class="label">
-							<span class="label-text">Phone Number</span>
-						</label>
-						<label class="input-group">
-							<span class="p-2 border-y border-l border-zinc-800">+91</span>
-							<input name="phone-number" type="text" required placeholder="" class="input input-bordered" />
-						</label>
-						<label class="label">
-							<span class="label-text">Passcode</span>
-						</label>
-						<div class="input-group">
-							<input
-								name="pass-code"
-								type="password"
-								required
-								placeholder="⁎⁎⁎⁎"
-								class="input input-bordered"
-							/>
-							<button class="btn btn-square">
-								<iconify-icon icon="mdi:eye" width="24" height="24" ></iconify-icon>
-							</button>
-						</div>
+<div class="flex flex-1 justify-center overflow-hidden  bg-base-200">
+	<div class="my-auto flex-row-reverse">
+		<div class="w-full bg-base-100 p-12">
+			<!-- svelte-ignore a11y-label-has-associated-control -->
+			<form method="POST" action="?/login">
+				<div class="form-control">
+					<label class="label">
+						<span class="label-text">Phone Number</span>
+					</label>
 
-						<button class="mt-4 btn btn-primary">Login</button>
+					<input
+						name="phone-number"
+						type="text"
+						inputmode="numeric"
+						pattern="\d*"
+						placeholder="10 - Digits"
+						class="input input-bordered"
+					/>
+					<label class="label">
+						<span class="label-text">Passcode</span>
+					</label>
+					<div class="input-group">
+						<input
+							name="pass-code"
+							type="password"
+							inputmode="numeric"
+							pattern="\d*"
+							placeholder="xxxx"
+							class="input input-bordered max-w-[80vw]"
+						/>
+						<button type="button" class="btn btn-square">
+							<iconify-icon icon="mdi:eye" width="24" height="24" />
+						</button>
 					</div>
-				</form>
-			</div>
+
+					<button type="submit" class="mt-4 btn btn-primary">Login</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
