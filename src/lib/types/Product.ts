@@ -1,4 +1,5 @@
 export type Product = {
+    thumbnail: string
     title: string
     image: string
     description: string
