@@ -1,4 +1,10 @@
 <script lang="ts">
+	import { numeric } from '$lib/validate/Numeric'
+
+	let state = {
+		pin: false,
+		confirm: false
+	}
 </script>
 
 <div class="flex flex-1 overflow-hidden justify-center bg-base-200">
@@ -11,7 +17,12 @@
 						<span class="label-text">Name</span>
 					</label>
 
-					<input name="username" type="text" placeholder="Name" class="input input-bordered" />
+					<input
+						name="username"
+						type="text"
+						placeholder="Name"
+						class="input input-bordered focus:outline-none"
+					/>
 					<label class="label">
 						<span class="label-text">Phone Number</span>
 					</label>
@@ -19,16 +30,17 @@
 						name="phone"
 						type="text"
 						inputmode="numeric"
+						on:keypress={numeric}
 						pattern="\d*"
 						placeholder="10 - Digits"
-						class="input input-bordered max-w-[95vw]"
+						class="input input-bordered focus:outline-none max-w-[95vw]"
 					/>
 					<label class="label">
 						<span class="label-text">Address</span>
 					</label>
 					<textarea
 						name="address"
-						class="textarea textarea-bordered resize-none"
+						class="textarea textarea-bordered focus:outline-none resize-none"
 						placeholder="Address"
 					/>
 					<label class="label">
@@ -37,13 +49,18 @@
 					<div class="input-group">
 						<input
 							name="pin"
-							type="password"
+							type={state.pin ? 'text' : 'password'}
 							inputmode="numeric"
+							on:keypress={numeric}
 							pattern="\d*"
 							placeholder="xxxx"
-							class="input input-bordered max-w-[80vw]"
+							class="input input-bordered focus:outline-none max-w-[80vw]"
 						/>
-						<button type="button" class="btn btn-square flex-shrink">
+						<button
+							type="button"
+							class="btn btn-square flex-shrink"
+							on:click={() => (state.pin = !state.pin)}
+						>
 							<iconify-icon icon="mdi:eye" width="24" height="24" />
 						</button>
 					</div>
@@ -54,12 +71,17 @@
 						<input
 							name="confirm-pin"
 							inputmode="numeric"
-							type="password"
+							on:keypress={numeric}
+							type={state.confirm ? 'text' : 'password'}
 							pattern="\d*"
 							placeholder="xxxx"
-							class="input input-bordered max-w-[80vw]"
+							class="input input-bordered focus:outline-none max-w-[80vw]"
 						/>
-						<button type="button" class="btn btn-square">
+						<button
+							type="button"
+							class="btn btn-square"
+							on:click={() => (state.confirm = !state.confirm)}
+						>
 							<iconify-icon icon="mdi:eye" width="24" height="24" />
 						</button>
 					</div>
