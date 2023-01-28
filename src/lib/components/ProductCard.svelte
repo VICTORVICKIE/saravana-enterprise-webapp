@@ -1,5 +1,4 @@
 <script lang="ts">
-	import ThemeToggleButton from '$lib/components/ThemeToggleButton.svelte'
 	import type { Product } from '$lib/types/Product'
 	import QuantityCounter from './QuantityCounter.svelte'
 	export let product: Product
@@ -15,8 +14,9 @@
 		<h2>{product.title}</h2>
 		<div class="badge">{product.category}</div>
 	</div>
+	<!-- Need to work on image here later -->
 	<figure class="px-8">
-		<img src={product.image} alt="Shoes" class="rounded-md" />
+		<img src={product.thumbnail} alt="Shoes" class="h-40 rounded-md" />
 	</figure>
 	<div class="card-body gap-4">
 		<div class="card-actions items-center justify-between">
@@ -27,7 +27,6 @@
 		</div>
 		<div class="card-actions">
 			<button class="btn flex-1 rounded-md btn-primary">Add to List</button>
-			<ThemeToggleButton />
 		</div>
 	</div>
 </div>
