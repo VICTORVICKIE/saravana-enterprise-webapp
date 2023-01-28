@@ -22,9 +22,8 @@
 	})
 </script>
 
-<h1 class="text-3xl flex my-auto justify-center font-bold">Product Page</h1>
-
-<div class="grid">
+<!-- grid-cols-fit is a custom extention applied in tailwind.config.cjs -->
+<div class="grid grid-cols-fit gap-2 bg-base-200">
 	{#each $search_store.filtered as product}
 		<ProductCard {product} />
 	{/each}
