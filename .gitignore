@@ -14,4 +14,4 @@ vite.config.ts.timestamp-*
 .prettierrc
 .npmrc
 **/*.*~
-notes.svelte
+notes/
