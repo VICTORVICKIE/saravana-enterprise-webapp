@@ -1,10 +1,15 @@
 <script lang="ts">
-	import ThemeToggleButton from '$components/ThemeToggleButton.svelte'
+	import ThemeToggleButton from '$lib/components/ThemeToggleButton.svelte'
+	import { search_term } from '$lib/stores/search'
 
 	let toggle: boolean = false
 
 	function toggle_sidebar() {
 		toggle = !toggle
+	}
+
+	function update_search_term(event) {
+		search_term.update((search_term) => event.target.value)
 	}
 </script>
 
@@ -14,11 +19,16 @@
 		<!-- Navbar -->
 		<div class="w-full navbar bg-base-300">
 			<div class="flex-1">
-				<a href="/" class="btn btn-ghost normal-case text-xl">E-Commerce Client</a>
+				<a href="/" class="btn btn-ghost normal-case text-xl">Saravana Enterprise</a>
 			</div>
 			<div class="flex-none gap-2">
 				<div class="form-control">
-					<input type="text" placeholder="Search" class="input input-bordered" />
+					<input
+						type="search"
+						placeholder="Search..."
+						class="input input-bordered"
+						on:input={update_search_term}
+					/>
 				</div>
 				<div class="dropdown dropdown-end">
 					<button class="btn btn-ghost btn-circle avatar" on:click={toggle_sidebar}>
@@ -29,6 +39,7 @@
 				</div>
 			</div>
 		</div>
+
 		<!-- Page content here -->
 		<slot />
 	</div>
