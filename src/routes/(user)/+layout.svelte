@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ThemeToggleButton from '$components/ThemeToggleButton.svelte'
+	import ThemeToggleButton from '$lib/components/ThemeToggleButton.svelte'
 
 	let toggle: boolean = false
 
@@ -12,13 +12,13 @@
 	<input id="toggle-sidebar" type="checkbox" class="drawer-toggle" bind:checked={toggle} />
 	<div class="drawer-content flex flex-col">
 		<!-- Navbar -->
-		<div class="w-full navbar bg-base-300">
+		<div class="w-full navbar bg-base-100">
 			<div class="flex-none lg:hidden">
 				<button class="btn btn-square btn-ghost" on:click={toggle_sidebar}>
 					<iconify-icon icon="ph:list-duotone" width="24" height="24" />
 				</button>
 			</div>
-			<div class="flex-1 px-2 mx-2 normal-case text-xl">E-Commerce Client</div>
+			<div class="flex-1 px-2 mx-2 normal-case text-2xl">Saravana Enterprise</div>
 			<div class="flex-none hidden lg:block">
 				<ul class="menu menu-horizontal">
 					<!-- Navbar menu content here -->
