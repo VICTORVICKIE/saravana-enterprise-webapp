@@ -4,7 +4,11 @@ const { default: themes } = require('daisyui/src/colors/themes')
 module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {}
+		extend: {
+			gridTemplateColumns: {
+				fit: 'repeat(auto-fit, minmax(20rem, 1fr))'
+			}
+		}
 	},
 	plugins: [require('daisyui'), require('tailwind-scrollbar-hide')],
 	daisyui: {
