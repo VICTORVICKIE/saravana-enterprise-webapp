@@ -24,12 +24,22 @@
 </script>
 
 <div class="drawer">
-	<input id="toggle-sidebar" type="checkbox" class="drawer-toggle" bind:checked={state.sidebar} />
+	<input
+		id="toggle-sidebar"
+		aria-label="Toggle Drawer"
+		type="checkbox"
+		class="drawer-toggle"
+		bind:checked={state.sidebar}
+	/>
 	<div class="drawer-content flex flex-col">
 		<!-- Navbar -->
 		<div class="w-full navbar justify-between gap-2 bg-base-100">
 			<div class="flex-none lg:hidden">
-				<button class="btn btn-square btn-ghost" on:click={() => (state.sidebar = !state.sidebar)}>
+				<button
+					aria-label="Toggle Drawer"
+					class="btn btn-square btn-ghost"
+					on:click={() => (state.sidebar = !state.sidebar)}
+				>
 					<iconify-icon icon="ph:list-duotone" width="36" height="36" />
 				</button>
 			</div>
@@ -67,7 +77,9 @@
 		</div>
 
 		<!-- Page content here -->
-		<slot />
+		<main>
+			<slot />
+		</main>
 	</div>
 	<div class="drawer-side">
 		<label for="toggle-sidebar" class="drawer-overlay" />
