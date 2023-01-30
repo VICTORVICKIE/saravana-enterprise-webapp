@@ -5,11 +5,11 @@
 @font-face {
 	font-family: 'Eras Bold ITC';
 	font-display: swap;
-	src: url('/fonts/Eras Bold ITC.eot'); /* IE9*/
-	src: url('/fonts/Eras Bold ITC.eot?#iefix') format('embedded-opentype'),
-		/* IE6-IE8 */ url('/fonts/Eras Bold ITC.woff2') format('woff2'),
-		/* chrome、firefox */ url('/fonts/Eras Bold ITC.woff') format('woff'),
-		/* chrome、firefox */ url('/fonts/Eras Bold ITC.ttf') format('truetype'),
+	src: url('/fonts/Eras_Bold_ITC.eot'); /* IE9*/
+	src: url('/fonts/Eras_Bold_ITC.eot?#iefix') format('embedded-opentype'),
+		/* IE6-IE8 */ url('/fonts/Eras_Bold_ITC.woff2') format('woff2'),
+		/* chrome、firefox */ url('/fonts/Eras_Bold_ITC.woff') format('woff'),
+		/* chrome、firefox */ url('/fonts/Eras_Bold_ITC.ttf') format('truetype'),
 		/* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-			url('/fonts/Eras Bold ITC.svg#Eras Bold ITC') format('svg'); /* iOS 4.1- */
+			url('/fonts/Eras_Bold_ITC.svg#Eras_Bold_ITC') format('svg'); /* iOS 4.1- */
 }
