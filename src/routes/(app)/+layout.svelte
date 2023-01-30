@@ -1,29 +1,26 @@
 <script lang="ts">
 	import ThemeToggleButton from '$lib/components/ThemeToggleButton.svelte'
-	import { onMount } from 'svelte'
-	import { pwaInfo } from 'virtual:pwa-info'
 
 	let state = { sidebar: false }
-
-	onMount(async () => {
-		if (pwaInfo) {
-			const { registerSW } = await import('virtual:pwa-register')
-			registerSW({
-				immediate: true
-			})
-		}
-	})
-
-	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : ''
 </script>
 
 <div class="drawer">
-	<input id="toggle-sidebar" type="checkbox" class="drawer-toggle" bind:checked={state.sidebar} />
+	<input
+		id="toggle-sidebar"
+		aria-label="Toggle Drawer"
+		type="checkbox"
+		class="drawer-toggle"
+		bind:checked={state.sidebar}
+	/>
 	<div class="drawer-content flex flex-col">
 		<!-- Navbar -->
 		<div class="w-full navbar bg-base-100">
 			<div class="flex-none lg:hidden">
-				<button class="btn btn-square btn-ghost" on:click={() => (state.sidebar = !state.sidebar)}>
+				<button
+					aria-label="Toggle Drawer"
+					class="btn btn-square btn-ghost"
+					on:click={() => (state.sidebar = !state.sidebar)}
+				>
 					<iconify-icon icon="ph:list-duotone" width="24" height="24" />
 				</button>
 			</div>
@@ -38,7 +35,9 @@
 			</div>
 		</div>
 		<!-- Page content here -->
-		<slot />
+		<main>
+			<slot />
+		</main>
 	</div>
 	<div class="drawer-side">
 		<label for="toggle-sidebar" class="drawer-overlay" />
@@ -46,7 +45,7 @@
 			<!-- Sidebar content here -->
 			<li><a on:click={() => (state.sidebar = !state.sidebar)} href="/login">Login</a></li>
 			<li><a on:click={() => (state.sidebar = !state.sidebar)} href="/register">Register</a></li>
-			<ThemeToggleButton />
+			<li><ThemeToggleButton /></li>
 		</ul>
 	</div>
 </div>
