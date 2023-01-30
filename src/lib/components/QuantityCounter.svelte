@@ -6,7 +6,7 @@
 
 <div class="flex flex-row h-10 w-fit rounded-md">
 	<button
-		data-action="decrement"
+		aria-label="decrement"
 		class=" h-full w-8 rounded-l-md cursor-pointer outline-none"
 		disabled={quantity <= 1}
 		on:click={() => quantity--}
@@ -15,6 +15,7 @@
 	</button>
 	<input
 		type="text"
+		aria-label="Quantity"
 		inputmode="numeric"
 		pattern="\d*"
 		class="input input-bordered text-center h-full w-16"
@@ -23,7 +24,7 @@
 		on:keypress={numeric}
 	/>
 	<button
-		data-action="increment"
+		aria-label="increment"
 		class=" h-full w-8 rounded-r-md cursor-pointer"
 		on:click={() => quantity++}
 	>

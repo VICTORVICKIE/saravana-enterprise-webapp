@@ -1,11 +1,17 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
+	import { pwa_themes } from '$lib/constant/values'
+
 	// default theme
 	var theme: string = browser ? document.cookie.split('=')[1] ?? 'dark' : 'dark'
 
 	function set_theme() {
 		theme = theme === 'dark' ? 'light' : 'dark'
+		let theme_meta = document.documentElement.querySelector(
+			'meta[name="theme-color"'
+		) as HTMLMetaElement
 
+		theme_meta.content = pwa_themes[theme]
 		document.documentElement.dataset.theme = theme
 		document.cookie = `se_theme=${theme};max-age=31536000;path="/"`
 	}

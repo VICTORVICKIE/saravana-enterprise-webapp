@@ -4,6 +4,7 @@
 
 @font-face {
 	font-family: 'Eras Bold ITC';
+	font-display: swap;
 	src: url('/fonts/Eras Bold ITC.eot'); /* IE9*/
 	src: url('/fonts/Eras Bold ITC.eot?#iefix') format('embedded-opentype'),
 		/* IE6-IE8 */ url('/fonts/Eras Bold ITC.woff2') format('woff2'),
