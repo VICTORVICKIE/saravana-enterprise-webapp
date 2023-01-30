@@ -2,7 +2,8 @@ const { default: themes } = require('daisyui/src/colors/themes')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+	content: ['./src/**/*.{html,svelte,ts}'],
+	purge: ['./src/**/*.{html,svelte,ts}'],
 	theme: {
 		extend: {
 			gridTemplateColumns: {
