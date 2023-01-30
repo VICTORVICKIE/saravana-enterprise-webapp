@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import ThemeToggleButton from '$lib/components/ThemeToggleButton.svelte'
 	import { search_term } from '$lib/stores/search'
 
@@ -6,10 +7,13 @@
 		sidebar: false,
 		search: false
 	}
+	$: path = $page.url.pathname === '/products' ? true : false
+
 	let search_group: HTMLDivElement
 
-	function update_search_term(event) {
-		search_term.update((search_term) => event.target.value)
+	function update_search_term(event: Event) {
+		const input = event.target as HTMLInputElement
+		search_term.update((search_term) => input.value)
 	}
 
 	function toggle_search_bar() {
@@ -23,10 +27,10 @@
 	<input id="toggle-sidebar" type="checkbox" class="drawer-toggle" bind:checked={state.sidebar} />
 	<div class="drawer-content flex flex-col">
 		<!-- Navbar -->
-		<div class="w-full navbar justify-between bg-base-100">
+		<div class="w-full navbar justify-between gap-2 bg-base-100">
 			<div class="flex-none lg:hidden">
 				<button class="btn btn-square btn-ghost" on:click={() => (state.sidebar = !state.sidebar)}>
-					<iconify-icon icon="ph:list-duotone" width="24" height="24" />
+					<iconify-icon icon="ph:list-duotone" width="36" height="36" />
 				</button>
 			</div>
 			<div
@@ -38,25 +42,28 @@
 			<iconify-icon
 				class="lg:hidden hover:cursor-pointer {state.search ? 'hidden' : 'block'}"
 				icon="ph:magnifying-glass-duotone"
-				width="24"
-				height="24"
+				width="36"
+				height="36"
 				on:click={toggle_search_bar}
 			/>
 			<div class="flex-none gap-2">
 				<div class="form-control">
-					<div bind:this={search_group} class="input-group hidden lg:block">
-						<button on:click={toggle_search_bar} class="btn btn-square lg:hidden">
-							<iconify-icon icon="ph:x-duotone" width="24" height="24" />
+					<div bind:this={search_group} class="input-group h-9 hidden lg:block">
+						<button on:click={toggle_search_bar} class="btn btn-square min-h-0 h-9 w-9 lg:hidden">
+							<iconify-icon icon="ph:x-duotone" width="36" height="36" />
 						</button>
 						<input
 							type="search"
 							placeholder="Search..."
-							class="input input-bordered focus:outline-none"
+							class="input input-bordered h-9 focus:outline-none"
 							on:input={update_search_term}
 						/>
 					</div>
 				</div>
 			</div>
+			<a href={path ? '/list' : '/products'}>
+				<iconify-icon icon="ph:{path ? 'notepad' : 'note-pencil'}-duotone" width="36" height="36" />
+			</a>
 		</div>
 
 		<!-- Page content here -->

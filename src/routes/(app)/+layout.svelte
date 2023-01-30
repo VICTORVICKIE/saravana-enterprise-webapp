@@ -1,7 +1,20 @@
 <script lang="ts">
 	import ThemeToggleButton from '$lib/components/ThemeToggleButton.svelte'
+	import { onMount } from 'svelte'
+	import { pwaInfo } from 'virtual:pwa-info'
 
 	let state = { sidebar: false }
+
+	onMount(async () => {
+		if (pwaInfo) {
+			const { registerSW } = await import('virtual:pwa-register')
+			registerSW({
+				immediate: true
+			})
+		}
+	})
+
+	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : ''
 </script>
 
 <div class="drawer">
