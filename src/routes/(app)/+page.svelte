@@ -2,7 +2,7 @@
 </script>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
-<div class="hero min-h-screen bg-base-200">
+<div class="hero flex-1 bg-base-200">
 	<div class="hero-content flex-col lg:flex-row-reverse">
 		<div class="text-center flex flex-col ">
 			<h1 class="text-5xl font-bold">ௐ</h1>

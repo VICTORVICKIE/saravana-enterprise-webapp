@@ -33,7 +33,7 @@
 	/>
 	<div class="drawer-content flex flex-col">
 		<!-- Navbar -->
-		<div class="w-full navbar justify-between gap-2 bg-base-100">
+		<div class="w-full sticky top-0 z-20 navbar justify-between gap-2 bg-base-100">
 			<div class="flex-none lg:hidden">
 				<button
 					aria-label="Toggle Drawer"

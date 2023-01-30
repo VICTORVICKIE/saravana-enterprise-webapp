@@ -14,7 +14,7 @@
 	/>
 	<div class="drawer-content flex flex-col">
 		<!-- Navbar -->
-		<div class="w-full navbar bg-base-100">
+		<div class="w-full sticky top-0 z-20 navbar bg-base-100">
 			<div class="flex-none lg:hidden">
 				<button
 					aria-label="Toggle Drawer"
@@ -35,7 +35,7 @@
 			</div>
 		</div>
 		<!-- Page content here -->
-		<main>
+		<main class="flex flex-1">
 			<slot />
 		</main>
 	</div>
