@@ -17,7 +17,6 @@ specifiers:
   prettier-plugin-svelte: ^2.8.1
   svelte: ^3.54.0
   svelte-check: ^3.0.1
-  svelte-multicssclass: ^2.1.0
   tailwind-scrollbar-hide: ^1.1.7
   tailwindcss: ^3.2.4
   tslib: ^2.4.1
@@ -28,7 +27,6 @@ specifiers:
 dependencies:
   daisyui: 2.47.0_gbtt6ss3tbiz4yjtvdr6fbrj44
   iconify-icon: 1.0.2
-  svelte-multicssclass: 2.1.0
   tailwind-scrollbar-hide: 1.1.7
 
 devDependencies:
@@ -3850,10 +3848,6 @@ packages:
     dependencies:
       svelte: 3.55.1
     dev: true
-
-  /svelte-multicssclass/2.1.0:
-    resolution: {integrity: sha512-aquFYyjhBA+6up14p0IMVBsXCeZaKeU2m/h0S4ePJi0eQMOAjah8rM5CKNiD5+Tvb/cjTV5hd9z0+y+FVA1cNg==}
-    dev: false
 
   /svelte-preprocess/5.0.1_oifjsu5oar4lzyaoppb2hxramu:
     resolution: {integrity: sha512-0HXyhCoc9rsW4zGOgtInylC6qj259E1hpFnJMJWTf+aIfeqh4O/QHT31KT2hvPEqQfdjmqBR/kO2JDkkciBLrQ==}
