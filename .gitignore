@@ -15,3 +15,5 @@ vite.config.ts.timestamp-*
 .npmrc
 **/*.*~
 notes/
+dev.db
+.vscode

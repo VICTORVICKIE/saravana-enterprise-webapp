@@ -33,24 +33,24 @@
 	/>
 	<div class="drawer-content flex flex-col">
 		<!-- Navbar -->
-		<div class="w-full sticky top-0 z-20 navbar justify-between gap-2 bg-base-100">
+		<div class="navbar sticky top-0 z-20 w-full justify-between gap-2 bg-base-100">
 			<div class="flex-none lg:hidden">
 				<button
 					aria-label="Toggle Drawer"
-					class="btn btn-square btn-ghost"
+					class="btn-ghost btn-square btn"
 					on:click={() => (state.sidebar = !state.sidebar)}
 				>
 					<iconify-icon icon="ph:list-duotone" width="36" height="36" />
 				</button>
 			</div>
 			<div
-				class="flex-1 px-2 mx-2 normal-case text-2xl {state.search ? 'hidden' : 'block'} md:block"
+				class="mx-2 flex-1 px-2 text-2xl normal-case {state.search ? 'hidden' : 'block'} md:block"
 			>
 				Saravana Enterprise
 			</div>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<iconify-icon
-				class="lg:hidden hover:cursor-pointer {state.search ? 'hidden' : 'block'}"
+				class="hover:cursor-pointer lg:hidden {state.search ? 'hidden' : 'block'}"
 				icon="ph:magnifying-glass-duotone"
 				width="36"
 				height="36"
@@ -58,14 +58,14 @@
 			/>
 			<div class="flex-none gap-2">
 				<div class="form-control">
-					<div bind:this={search_group} class="input-group h-9 hidden lg:block">
-						<button on:click={toggle_search_bar} class="btn btn-square min-h-0 h-9 w-9 lg:hidden">
+					<div bind:this={search_group} class="input-group hidden h-9 lg:block">
+						<button on:click={toggle_search_bar} class="btn-square btn h-9 min-h-0 w-9 lg:hidden">
 							<iconify-icon icon="ph:x-duotone" width="36" height="36" />
 						</button>
 						<input
 							type="search"
 							placeholder="Search..."
-							class="input input-bordered h-9 focus:outline-none"
+							class="input-bordered input h-9 focus:outline-none"
 							on:input={update_search_term}
 						/>
 					</div>
@@ -77,13 +77,11 @@
 		</div>
 
 		<!-- Page content here -->
-		<main>
-			<slot />
-		</main>
+		<slot />
 	</div>
 	<div class="drawer-side">
 		<label for="toggle-sidebar" class="drawer-overlay" />
-		<ul class="menu p-4 w-80 bg-base-100">
+		<ul class="menu w-80 bg-base-100 p-4">
 			<!-- Sidebar content here -->
 			<li>
 				<a on:click={() => (state.sidebar = !state.sidebar)} href="/products">Profile</a>

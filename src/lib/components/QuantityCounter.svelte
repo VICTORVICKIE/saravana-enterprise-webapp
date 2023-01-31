@@ -4,10 +4,10 @@
 	export let quantity = 1
 </script>
 
-<div class="flex flex-row h-10 w-fit rounded-md">
+<div class="flex h-10 w-fit flex-row rounded-md">
 	<button
 		aria-label="decrement"
-		class=" h-full w-8 rounded-l-md cursor-pointer outline-none"
+		class=" h-full w-8 cursor-pointer rounded-l-md outline-none"
 		disabled={quantity <= 1}
 		on:click={() => quantity--}
 	>
@@ -18,14 +18,14 @@
 		aria-label="Quantity"
 		inputmode="numeric"
 		pattern="\d*"
-		class="input input-bordered text-center h-full w-16"
+		class="input-bordered input h-full w-16 text-center"
 		name="custom-input-number"
 		value={quantity}
 		on:keypress={numeric}
 	/>
 	<button
 		aria-label="increment"
-		class=" h-full w-8 rounded-r-md cursor-pointer"
+		class=" h-full w-8 cursor-pointer rounded-r-md"
 		on:click={() => quantity++}
 	>
 		<span class="m-auto text-2xl font-thin">+</span>

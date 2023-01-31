@@ -7,7 +7,7 @@
 	}
 </script>
 
-<div class="flex flex-1 overflow-hidden justify-center bg-base-200">
+<div class="flex flex-1 justify-center overflow-hidden bg-base-200">
 	<div class="my-auto flex-row-reverse">
 		<div class="w-full bg-base-100 p-12">
 			<!-- svelte-ignore a11y-label-has-associated-control -->
@@ -18,10 +18,10 @@
 					</label>
 
 					<input
-						name="username"
+						name="name"
 						type="text"
 						placeholder="Name"
-						class="input input-bordered focus:outline-none"
+						class="input-bordered input focus:outline-none"
 					/>
 					<label class="label">
 						<span class="label-text">Phone Number</span>
@@ -33,14 +33,14 @@
 						on:keypress={numeric}
 						pattern="\d*"
 						placeholder="10 - Digits"
-						class="input input-bordered focus:outline-none max-w-[95vw]"
+						class="input-bordered input max-w-[95vw] focus:outline-none"
 					/>
 					<label class="label">
 						<span class="label-text">Address</span>
 					</label>
 					<textarea
 						name="address"
-						class="textarea textarea-bordered focus:outline-none resize-none"
+						class="textarea-bordered textarea resize-none focus:outline-none"
 						placeholder="Address"
 					/>
 					<label class="label">
@@ -54,11 +54,11 @@
 							on:keypress={numeric}
 							pattern="\d*"
 							placeholder="xxxx"
-							class="input input-bordered focus:outline-none max-w-[80vw]"
+							class="input-bordered input max-w-[80vw] focus:outline-none"
 						/>
 						<button
 							type="button"
-							class="btn btn-square flex-shrink"
+							class="btn-square btn flex-shrink"
 							on:click={() => (state.pin = !state.pin)}
 						>
 							<iconify-icon icon="mdi:eye" width="24" height="24" />
@@ -69,23 +69,23 @@
 					</label>
 					<div class="input-group">
 						<input
-							name="confirm-pin"
+							name="confirm_pin"
 							inputmode="numeric"
 							on:keypress={numeric}
 							type={state.confirm ? 'text' : 'password'}
 							pattern="\d*"
 							placeholder="xxxx"
-							class="input input-bordered focus:outline-none max-w-[80vw]"
+							class="input-bordered input max-w-[80vw] focus:outline-none"
 						/>
 						<button
 							type="button"
-							class="btn btn-square"
+							class="btn-square btn"
 							on:click={() => (state.confirm = !state.confirm)}
 						>
 							<iconify-icon icon="mdi:eye" width="24" height="24" />
 						</button>
 					</div>
-					<button type="submit" class="mt-4 btn btn-primary">Register</button>
+					<button type="submit" class="btn-primary btn mt-4">Register</button>
 				</div>
 			</form>
 		</div>

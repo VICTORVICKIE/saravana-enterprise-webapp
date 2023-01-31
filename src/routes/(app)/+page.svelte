@@ -4,24 +4,29 @@
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <div class="hero flex-1 bg-base-200">
 	<div class="hero-content flex-col lg:flex-row-reverse">
-		<div class="text-center flex flex-col ">
+		<div class="flex flex-col text-center ">
 			<h1 class="text-5xl font-bold">ௐ</h1>
-			<h1 class="text-4xl font-bold pt-4">Saravana Enterprise</h1>
+			<h1 class="pt-4 text-4xl font-bold">Saravana Enterprise</h1>
 			<p class="py-6">
 				Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
 				quasi. In deleniti eaque aut repudiandae et a id nisi.
 			</p>
 		</div>
-		<div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+		<div class="card max-w-sm flex-shrink-0 bg-base-100 shadow-xl">
 			<div class="card-body">
-				<div class="flex  flex-col w-full border-opacity-50">
-					<div class="flex justify-center w-full">
-						<a href="/register"><button class="flex-1 btn btn-primary">Register</button></a>
+				<div class="grid grid-cols-3 grid-rows-3 justify-center">
+					<a class="col-span-1 grid" href="/register"
+						><button class=" btn-primary btn">Register</button></a
+					>
+					<div class="col-span-1 grid justify-center">
 						<div class="divider divider-horizontal" />
-						<a href="/login"><button class="flex-1 btn btn-primary">Login</button></a>
 					</div>
-					<div class="divider">OR</div>
-					<a href="/products"><button class="w-full btn btn-primary">Guest</button></a>
+					<a class="col-span-1 grid" href="/login"><button class="btn-primary btn">Login</button></a
+					>
+					<div class="divider col-span-3">OR</div>
+					<a class="col-span-3 grid " href="/products"
+						><button class="btn-primary btn ">Guest</button></a
+					>
 				</div>
 			</div>
 		</div>

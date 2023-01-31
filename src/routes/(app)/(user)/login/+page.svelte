@@ -21,7 +21,7 @@
 						on:keypress={numeric}
 						pattern="\d*"
 						placeholder="10 - Digits"
-						class="input input-bordered focus:outline-none"
+						class="input-bordered input focus:outline-none"
 					/>
 					<label class="label">
 						<span class="label-text">Passcode</span>
@@ -34,18 +34,18 @@
 							on:keypress={numeric}
 							pattern="\d*"
 							placeholder="xxxx"
-							class="input input-bordered focus:outline-none max-w-[80vw]"
+							class="input-bordered input max-w-[80vw] focus:outline-none"
 						/>
 						<button
 							type="button"
-							class="btn btn-square"
+							class="btn-square btn"
 							on:click={() => (state.show_pin = !state.show_pin)}
 						>
 							<iconify-icon icon="mdi:eye" width="24" height="24" />
 						</button>
 					</div>
 
-					<button type="submit" class="mt-4 btn btn-primary">Login</button>
+					<button type="submit" class="btn-primary btn mt-4">Login</button>
 				</div>
 			</form>
 		</div>

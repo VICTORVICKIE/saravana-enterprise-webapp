@@ -29,10 +29,10 @@ const config: UserConfig = {
 						type: 'image/png'
 					},
 					{
-						"src": "icons/maskable_icon.png",
-						"sizes": "196x196",
-						"type": "image/png",
-						"purpose": "any maskable"
+						src: 'icons/maskable_icon.png',
+						sizes: '196x196',
+						type: 'image/png',
+						purpose: 'any maskable'
 					}
 				]
 			}

@@ -10,7 +10,7 @@
 <div
 	class="card mx-auto mt-12 w-80 bg-base-100 shadow-sm shadow-[#808080] transition-all hover:scale-[101%] hover:shadow-md hover:shadow-zinc-800 "
 >
-	<div class="mx-8 justify-between card-title my-4">
+	<div class="card-title mx-8 my-4 justify-between">
 		<h2>{product.title}</h2>
 		<div class="badge">{product.category}</div>
 	</div>
@@ -26,7 +26,7 @@
 			<QuantityCounter bind:quantity />
 		</div>
 		<div class="card-actions">
-			<button class="btn flex-1 rounded-md btn-primary">Add to List</button>
+			<button class="btn-primary btn flex-1 rounded-md">Add to List</button>
 		</div>
 	</div>
 </div>
