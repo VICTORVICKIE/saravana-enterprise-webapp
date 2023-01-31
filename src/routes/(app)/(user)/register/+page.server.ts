@@ -1,23 +1,34 @@
+import { prisma } from '$lib/server/prisma'
 import type { Actions } from '@sveltejs/kit'
+import { fail } from '@sveltejs/kit'
 
 export const actions: Actions = {
 	register: async ({ request }) => {
-		const form_data = await request.formData()
-		console.log(JSON.stringify(Object.fromEntries(form_data)))
-		// const result = await fetch('http://127.0.0.1:8000/users', {
-		//     method: 'POST',
-		//     headers: {
-		//         'Content-Type': 'application/json',
-		//         'Accept': 'application/json'
-		//     },
-		//     body: JSON.stringify({
-		//         "username": "Svelte",
-		//         "phone": "98754321",
-		//         "address": "string ,test, comma",
-		//         "pin": "1234"
-		//     })
-		// })
-		// const data = await result.json()
-		// console.log(data)
+		const form_data: FormData = await request.formData()
+		const { name, phone, address, pin, confirm_pin } = Object.fromEntries(form_data) as {
+			name: string
+			phone: string
+			address: string
+			pin: string
+			confirm_pin: string
+		}
+
+		try {
+			await prisma.user.create({
+				data: {
+					phone,
+					name,
+					pin,
+					address
+				}
+			})
+		} catch (error) {
+			console.error(error)
+			return fail(500, { message: "Could not register user" })
+		}
+
+		return {
+			status: 201
+		}
 	}
 }
