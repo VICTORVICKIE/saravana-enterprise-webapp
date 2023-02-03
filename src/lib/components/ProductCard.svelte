@@ -8,7 +8,7 @@
 </script>
 
 <div
-	class="card mx-auto mt-12 w-80 bg-base-100 shadow-sm shadow-[#808080] transition-all hover:scale-[101%] hover:shadow-md hover:shadow-zinc-800 "
+	class="card mx-auto mt-12 w-80 bg-base-100 shadow-sm shadow-neutral transition-all hover:scale-[101%] hover:shadow-md hover:shadow-neutral-focus"
 >
 	<div class="card-title mx-8 my-4 justify-between">
 		<h2>{product.title}</h2>

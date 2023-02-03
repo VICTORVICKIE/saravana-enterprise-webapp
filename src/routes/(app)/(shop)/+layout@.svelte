@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import ThemeToggleButton from '$lib/components/ThemeToggleButton.svelte'
+	import { state_list } from '$lib/stores/observer'
 	import { search_term } from '$lib/stores/search'
 
 	let state = {
 		sidebar: false,
 		search: false
 	}
-	$: path = $page.url.pathname === '/products' ? true : false
 
 	let search_group: HTMLDivElement
 
@@ -34,7 +34,7 @@
 	<div class="drawer-content flex flex-col">
 		<!-- Navbar -->
 		<div class="navbar sticky top-0 z-20 w-full justify-between gap-2 bg-base-100">
-			<div class="flex-none lg:hidden">
+			<div class="flex-none">
 				<button
 					aria-label="Toggle Drawer"
 					class="btn-ghost btn-square btn"
@@ -71,25 +71,47 @@
 					</div>
 				</div>
 			</div>
-			<a href={path ? '/list' : '/products'}>
-				<iconify-icon icon="ph:{path ? 'notepad' : 'note-pencil'}-duotone" width="36" height="36" />
-			</a>
+			<button on:click={() => state_list.update((x) => !x)}>
+				<iconify-icon
+					icon="ph:{$state_list ? 'note-pencil' : 'notepad'}-duotone"
+					width="36"
+					height="36"
+				/>
+			</button>
 		</div>
 
 		<!-- Page content here -->
 		<slot />
 	</div>
+
 	<div class="drawer-side">
 		<label for="toggle-sidebar" class="drawer-overlay" />
 		<ul class="menu w-80 bg-base-100 p-4">
 			<!-- Sidebar content here -->
-			<li>
-				<a on:click={() => (state.sidebar = !state.sidebar)} href="/products">Profile</a>
-			</li>
-			<li>
-				<a on:click={() => (state.sidebar = !state.sidebar)} href="/products">Logout</a>
-			</li>
-			<li><ThemeToggleButton /></li>
+			{#if $page.data.user.role !== 'GUEST'}
+				<li>
+					<a on:click={() => (state.sidebar = !state.sidebar)} href="/products">Profile</a>
+				</li>
+				{#if $page.data.user.role === 'ADMIN'}
+					<li>
+						<a on:click={() => (state.sidebar = !state.sidebar)} href="/admin">Admin</a>
+					</li>
+				{/if}
+				<li>
+					<form action="/logout" method="POST">
+						<button on:click={() => (state.sidebar = !state.sidebar)} type="submit">Logout</button>
+					</form>
+				</li>
+			{:else}
+				<li>
+					<a on:click={() => (state.sidebar = !state.sidebar)} href="/login">Login</a>
+				</li>
+				<li>
+					<a on:click={() => (state.sidebar = !state.sidebar)} href="/register">Register</a>
+				</li>
+			{/if}
+
+			<li><ThemeToggleButton size="24" /></li>
 		</ul>
 	</div>
 </div>
