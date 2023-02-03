@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment'
 	import { pwa_themes } from '$lib/constant/values'
 
+	export let size: string
 	// default theme
 	var theme: string = browser ? document.cookie.split('=')[1] ?? 'dark' : 'dark'
 
@@ -23,7 +24,7 @@
 	class="swap swap-rotate justify-start pl-4 pt-2 {theme === 'dark' ? '' : 'swap-active'}"
 	on:click={set_theme}
 >
-	<iconify-icon class="swap-on" icon="ph:sun-duotone" width="24" height="24" />
+	<iconify-icon class="swap-on" icon="ph:sun-duotone" width={size} height={size} />
 
-	<iconify-icon class="swap-off" icon="ph:moon-stars-duotone" width="24" height="24" />
+	<iconify-icon class="swap-off" icon="ph:moon-stars-duotone" width={size} height={size} />
 </label>
