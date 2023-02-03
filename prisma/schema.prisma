@@ -11,20 +11,30 @@ datasource db {
 }
 
 model User {
-  id      Int     @id @default(autoincrement())
+  id      String  @id @default(uuid())
   phone   String  @unique
   name    String
   pin     String
+  auth    String  @unique
   address String
-  Admin   Boolean @default(false)
+  role    Roles   @relation(fields: [role_id], references: [id])
+  role_id Int
   orders  Order[]
 
   @@index([phone])
 }
 
+model Roles {
+  id   Int    @id @default(autoincrement())
+  role String @unique
+  user User[]
+
+  @@index([role])
+}
+
 model Product {
   id          Int     @id @default(autoincrement())
-  name        String
+  name        String  @unique
   brand       String
   category    String
   price       Decimal
@@ -36,8 +46,8 @@ model Product {
 model Order {
   id      Int     @id @default(autoincrement())
   user    User    @relation(fields: [user_id], references: [id])
-  user_id Int
-  ordered Boolean @default(false)
+  user_id String
+  placed  Boolean @default(false)
   total   Decimal
   items   Item[]
 
