@@ -17,3 +17,4 @@ vite.config.ts.timestamp-*
 notes/
 dev.db
 .vscode
+src/routes/(app)/feature
