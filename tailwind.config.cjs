@@ -3,7 +3,6 @@ const { default: themes } = require('daisyui/src/colors/themes')
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ['./src/**/*.{html,svelte,ts}'],
-	purge: ['./src/**/*.{html,svelte,ts}'],
 	theme: {
 		extend: {
 			gridTemplateColumns: {
@@ -11,7 +10,7 @@ module.exports = {
 			}
 		}
 	},
-	plugins: [require('daisyui'), require('tailwind-scrollbar-hide')],
+	plugins: [require('daisyui')],
 	daisyui: {
 		styled: true,
 		themes: true,
