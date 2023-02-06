@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { numeric } from '$lib/validate/Numeric'
 
-	export let quantity = 1
+	export let quantity: number = 1
 </script>
 
 <div class="flex h-10 w-fit flex-row rounded-md">
