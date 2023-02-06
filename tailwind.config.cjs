@@ -3,6 +3,11 @@ const { default: themes } = require('daisyui/src/colors/themes')
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ['./src/**/*.{html,svelte,ts}'],
+	safelist: [
+		{
+			pattern: /^(badge|range)-(error|info|success|neutral)$/
+		}
+	],
 	theme: {
 		extend: {
 			gridTemplateColumns: {
