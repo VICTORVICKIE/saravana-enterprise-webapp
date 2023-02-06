@@ -26,5 +26,3 @@ export const search_handler = <T extends Record<PropertyKey, any>>(store: Search
 		return item.search_terms.toLowerCase().includes(search_term)
 	})
 }
-
-export const search_term = writable<string>('')

@@ -22,7 +22,7 @@ const theme: Handle = async ({ event, resolve }) => {
 const enterprise: Handle = async ({ event, resolve }) => {
 	let { user, session } = await event.locals.validateUser()
 	if (event.url.pathname.startsWith('/enterprise')) {
-		if (!session || user?.role !== "ADMIN") {
+		if (!session || user?.role !== 'ADMIN') {
 			throw redirect(303, '/products')
 		}
 	}

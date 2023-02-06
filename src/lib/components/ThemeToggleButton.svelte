@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
-	import { pwa_themes } from '$lib/constant/values'
+	import { pwa_themes } from '$lib/constants'
 
 	export let size: string
 	// default theme

@@ -30,7 +30,7 @@
 					<!-- Navbar menu content here -->
 					<li><a href="/login">Login</a></li>
 					<li><a href="/register">Register</a></li>
-					<li><ThemeToggleButton size='36' /></li>
+					<li><ThemeToggleButton size="36" /></li>
 				</ul>
 			</div>
 		</div>
@@ -43,7 +43,7 @@
 			<!-- Sidebar content here -->
 			<li><a on:click={() => (state.sidebar = !state.sidebar)} href="/login">Login</a></li>
 			<li><a on:click={() => (state.sidebar = !state.sidebar)} href="/register">Register</a></li>
-			<li><ThemeToggleButton size='24' /></li>
+			<li><ThemeToggleButton size="24" /></li>
 		</ul>
 	</div>
 </div>
