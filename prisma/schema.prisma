@@ -6,30 +6,46 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
-  id      String  @id @default(uuid())
-  phone   String  @unique
+  id      String    @id @unique
+  phone   String    @unique
   name    String
-  pin     String
-  auth    String  @unique
   address String
-  role    Roles   @relation(fields: [role_id], references: [id])
-  role_id Int
+  role    String    @unique @default("USER")
   orders  Order[]
+  session Session[]
+  key     Key[]
 
   @@index([phone])
+  @@index([role])
+  @@map("user")
 }
 
-model Roles {
-  id   Int    @id @default(autoincrement())
-  role String @unique
-  user User[]
+model Session {
+  id             String @id @unique
+  user_id        String
+  active_expires BigInt
+  idle_expires   BigInt
+  user           User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
-  @@index([role])
+  @@index([user_id])
+  @@map("session")
+}
+
+model Key {
+  id              String  @id @unique
+  hashed_password String?
+  user_id         String
+  primary         Boolean
+  user            User    @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@map("key")
 }
 
 model Product {
@@ -38,20 +54,32 @@ model Product {
   brand       String
   category    String
   price       Decimal
-  description String
+  description String?
   image_url   String
   items       Item[]
+
+  @@index([name])
 }
 
 model Order {
-  id      Int     @id @default(autoincrement())
-  user    User    @relation(fields: [user_id], references: [id])
-  user_id String
-  placed  Boolean @default(false)
-  total   Decimal
-  items   Item[]
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [user_id], references: [id])
+  user_id    String
+  total      Decimal
+  ordered_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  state      State    @default(ORDERED)
+  items      Item[]
 
   @@index([user_id])
+  @@index([state])
+}
+
+enum State {
+  PENDING
+  ORDERED
+  DELIVERED
+  CANCELLED
 }
 
 model Item {
@@ -63,4 +91,5 @@ model Item {
   quantity   Int
 
   @@index([order_id])
+  @@index([product_id])
 }
