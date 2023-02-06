@@ -12,12 +12,13 @@
 	export let form: ActionData
 </script>
 
-<div class="flex flex-1 justify-center overflow-hidden bg-base-200">
+<div class="flex flex-1 justify-center bg-base-200">
 	<div class="my-auto flex-row-reverse">
 		<div class="w-full bg-base-100 p-12">
 			<!-- svelte-ignore a11y-label-has-associated-control -->
 			<form method="POST" action="?/register" use:enhance>
 				<div class="grid grid-cols-1">
+					<h1 class="mb-4 text-center text-2xl">Register</h1>
 					<!-- Name -->
 					<label class="label">
 						<span class="label-text">Name</span>

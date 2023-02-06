@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import ThemeToggleButton from '$lib/components/ThemeToggleButton.svelte'
-	import { state_list } from '$lib/stores/observer'
-	import { search_term } from '$lib/stores/search'
+	import { Roles } from '$lib/constants'
+	import { search_term, state_list } from '$lib/stores/observer'
+	import type { LayoutData } from './$types'
 
+	export let data: LayoutData
 	let state = {
 		sidebar: false,
 		search: false
@@ -88,13 +90,19 @@
 		<label for="toggle-sidebar" class="drawer-overlay" />
 		<ul class="menu w-80 bg-base-100 p-4">
 			<!-- Sidebar content here -->
-			{#if $page.data.user.role !== 'GUEST'}
+			{#if data.user?.role !== Roles[0]}
 				<li>
 					<a on:click={() => (state.sidebar = !state.sidebar)} href="/products">Profile</a>
 				</li>
-				{#if $page.data.user.role === 'ADMIN'}
+				{#if data.user?.role === Roles[2]}
 					<li>
-						<a on:click={() => (state.sidebar = !state.sidebar)} href="/admin">Admin</a>
+						<a on:click={() => (state.sidebar = !state.sidebar)} href="/enterprise/add"
+							>New Product</a
+						>
+					</li>
+					<li>
+						<a on:click={() => (state.sidebar = !state.sidebar)} href="/enterprise/orders">Orders</a
+						>
 					</li>
 				{/if}
 				<li>

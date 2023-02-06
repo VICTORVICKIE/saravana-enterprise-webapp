@@ -1,37 +1,36 @@
+import { Roles } from '$lib/constants'
+import { auth } from '$lib/server/lucia'
 import { prisma } from '$lib/server/prisma'
 import { fail, redirect } from '@sveltejs/kit'
-import bcrypt from 'bcrypt'
 import type { Action, Actions, PageServerLoad } from './$types'
 
-
-enum Roles {
-	USER = 'USER',
-	ADMIN = 'ADMIN',
-}
-
 export const load: PageServerLoad = async ({ locals }) => {
-	if (locals.user.role !== 'GUEST') {
+	const session = await locals.validate()
+	if (session) {
 		throw redirect(302, '/products')
 	}
 }
 
 const register: Action = async ({ request }) => {
-
 	const form_data: FormData = await request.formData()
-	const { name, phone, address, pin, confirm_pin } = Object.fromEntries(form_data) as {
-		name: string
-		phone: string
-		address: string
-		pin: string
-		confirm_pin: string
-	}
+	const { name, phone, address, pin, confirm_pin } = Object.fromEntries(form_data) as Record<
+		string,
+		string
+	>
 
-	if (typeof name !== 'string' ||
+	if (
+		typeof name !== 'string' ||
 		typeof phone !== 'string' ||
 		typeof address !== 'string' ||
 		typeof pin !== 'string' ||
 		typeof confirm_pin !== 'string' ||
-		!name || !phone || !address || !pin || !confirm_pin || pin !== confirm_pin) {
+		!name ||
+		!phone ||
+		!address ||
+		!pin ||
+		!confirm_pin ||
+		pin !== confirm_pin
+	) {
 		return fail(400, { invalid: true })
 	}
 
@@ -43,15 +42,17 @@ const register: Action = async ({ request }) => {
 		return fail(400, { user: true })
 	}
 
-	await prisma.user.create({
-		data: {
-			phone,
+	await auth.createUser({
+		key: {
+			providerId: 'phone',
+			providerUserId: phone,
+			password: pin
+		},
+		attributes: {
 			name,
-			pin: await bcrypt.hash(pin, 10),
-			auth: crypto.randomUUID(),
+			phone,
 			address,
-			role: { connect: { role: Roles.USER } }
-
+			role: Roles[1]
 		}
 	})
 
