@@ -20,11 +20,11 @@
 		<h1>Phone: {data.order.user.phone}</h1>
 	</div>
 
-	<div class="flex h-[75vh] overflow-auto">
+	<div class="h-[74vh] overflow-auto">
 		<table class="mx-auto table w-11/12">
 			<!-- head -->
-			<thead>
-				<tr class="h-0.5">
+			<thead class="sticky top-0 border-b">
+				<tr>
 					<th>Name</th>
 					<th class="text-center">Price</th>
 					<th class="text-center">Qty</th>
@@ -38,7 +38,8 @@
 			</tbody>
 		</table>
 	</div>
-	<div class=" sticky bottom-0 z-40 flex justify-end p-8 md:px-56">
-		<h1>Total: {data.order.total}.00</h1>
+
+	<div class="sticky bottom-0 flex justify-end border border-neutral bg-base-100 p-8 md:px-56">
+		<h1>Total: {data.order.total}</h1>
 	</div>
 </div>
