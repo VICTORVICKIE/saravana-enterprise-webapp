@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"preinstall": "npx only-allow pnpm",
-		"dev": "vite dev",
+		"dev": "dotenv -e .env.dev vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -52,7 +52,7 @@
 		"bcrypt": "^5.1.0",
 		"daisyui": "^2.47.0",
 		"firebase": "^9.17.1",
-		"iconify-icon": "^1.0.2",
+		"iconify-icon": "^1.0.3",
 		"lucia-auth": "^0.6.0"
 	}
 }

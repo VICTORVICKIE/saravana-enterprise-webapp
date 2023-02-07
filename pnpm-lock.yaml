@@ -19,7 +19,7 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-svelte3: ^4.0.0
   firebase: ^9.17.1
-  iconify-icon: ^1.0.2
+  iconify-icon: ^1.0.3
   lucia-auth: ^0.6.0
   postcss: ^8.4.21
   prettier: ^2.8.3
@@ -44,7 +44,7 @@ dependencies:
   bcrypt: 5.1.0
   daisyui: 2.47.0_by5iqycgvtroytm54ytclj4zzi
   firebase: 9.17.1
-  iconify-icon: 1.0.2
+  iconify-icon: 1.0.3
   lucia-auth: 0.6.0
 
 devDependencies:
@@ -3775,8 +3775,8 @@ packages:
       - supports-color
     dev: false
 
-  /iconify-icon/1.0.2:
-    resolution: {integrity: sha512-mehAvz2a4eUAlPo76Wul4zzsPNr3hbOHiauMhPrTVIdLOt0AnccnNloh1EeTO3tYeBv7iaJZfdCPHczvi+CkXQ==}
+  /iconify-icon/1.0.3:
+    resolution: {integrity: sha512-pyWLbx8IBfD2G3M0hULuvUBwoowrZtXEKyeAXhD2AlbNYTSDPmWGhgPYaRAnVIuBjMAZ4dCyEHmaYgnlDZc0XQ==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false

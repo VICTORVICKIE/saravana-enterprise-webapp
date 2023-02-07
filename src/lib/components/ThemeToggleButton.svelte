@@ -14,7 +14,7 @@
 
 		theme_meta.content = pwa_themes[theme]
 		document.documentElement.dataset.theme = theme
-		document.cookie = `se_theme=${theme};max-age=31536000;path="/"`
+		document.cookie = `se_theme=${theme};max-age=31536000;path="/";samesite=strict`
 	}
 </script>
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
 	import Alert from '$lib/components/Alert.svelte'
-	import { numeric } from '$lib/validate/Numeric'
+	import { input_validation } from '$lib/validate'
 	import type { ActionData } from './$types'
 
 	let state = {
@@ -29,6 +29,9 @@
 						placeholder="Name"
 						class="input-bordered input focus:outline-none"
 					/>
+					<label class="label hidden justify-end">
+						<span class="label-text-alt">Alt label</span>
+					</label>
 
 					<!-- Phone -->
 					<label class="label">
@@ -38,12 +41,13 @@
 						name="phone"
 						type="text"
 						inputmode="numeric"
-						on:keypress={numeric}
+						on:keypress={input_validation}
 						placeholder="10 - Digits"
-						class="input-bordered input focus:outline-none"
+						class="peer input-bordered input focus:outline-none"
 					/>
-					<label class="label justify-end">
-						<span class="label-text-alt">Alt label</span>
+					<!-- peer-data-[*error] is used to monitor if its present and show the error, nice little hack using custom validation and tailwind -->
+					<label class="label hidden justify-end peer-data-[phone-error]:flex">
+						<span class="label-text-alt">Minimum 10 digits</span>
 					</label>
 
 					<!-- Address -->
@@ -55,7 +59,9 @@
 						class="textarea-bordered textarea resize-none focus:outline-none"
 						placeholder="Address"
 					/>
-
+					<label class="label hidden justify-end ">
+						<span class="label-text-alt">Alt label</span>
+					</label>
 					<!-- Pin -->
 					<label class="label">
 						<span class="label-text">Passcode</span>
@@ -65,7 +71,7 @@
 							name="pin"
 							type={state.pin ? 'text' : 'password'}
 							inputmode="numeric"
-							on:keypress={numeric}
+							on:keypress={input_validation}
 							placeholder="xxxx"
 							class="input-bordered input focus:outline-none"
 						/>
@@ -77,6 +83,9 @@
 							<iconify-icon icon="mdi:eye" width="24" height="24" />
 						</button>
 					</div>
+					<label class="label hidden justify-end peer-data-[pin-error]:flex">
+						<span class="label-text-alt">Minimum 4 digits</span>
+					</label>
 
 					<!-- Confirm Pin -->
 					<label class="label">
@@ -86,7 +95,7 @@
 						<input
 							name="confirm_pin"
 							inputmode="numeric"
-							on:keypress={numeric}
+							on:keypress={input_validation}
 							type={state.confirm ? 'text' : 'password'}
 							placeholder="xxxx"
 							class="input-bordered input focus:outline-none"
@@ -99,6 +108,10 @@
 							<iconify-icon icon="mdi:eye" width="24" height="24" />
 						</button>
 					</div>
+					<label class="label hidden justify-end peer-data-[confirm_pin-error]:flex">
+						<span class="label-text-alt">Minimum 4 digits</span>
+					</label>
+
 					<button type="submit" class="btn-primary btn my-4">Register</button>
 					{#if form?.phone}
 						<Alert content="User Already Exists" />

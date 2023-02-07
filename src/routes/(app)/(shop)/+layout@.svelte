@@ -107,7 +107,11 @@
 				{/if}
 				<li>
 					<form action="/logout" method="POST">
-						<button on:click={() => (state.sidebar = !state.sidebar)} type="submit">Logout</button>
+						<button
+							class="w-full text-start"
+							on:click={() => (state.sidebar = !state.sidebar)}
+							type="submit">Logout</button
+						>
 					</form>
 				</li>
 			{:else}

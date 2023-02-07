@@ -1,10 +1,23 @@
 <script lang="ts">
-	import { enhance } from '$app/forms'
+	import { applyAction, enhance, type SubmitFunction } from '$app/forms'
 	import Alert from '$lib/components/Alert.svelte'
-	import { numeric } from '$lib/validate/Numeric'
+	import { input_validation } from '$lib/validate'
 	import type { ActionData } from './$types'
 
 	let state = { show_pin: false }
+
+	export const form_validation: SubmitFunction = async ({ form, data }) => {
+		console.log(data)
+		return async ({ result, update }) => {
+			if (result.type === 'success') {
+				form.reset()
+			}
+			if (result.type === 'failure') {
+				await applyAction(result)
+			}
+			await update()
+		}
+	}
 
 	export let form: ActionData
 </script>
@@ -24,8 +37,7 @@
 						name="phone"
 						type="text"
 						inputmode="numeric"
-						on:keypress={numeric}
-						pattern="\d*"
+						on:keypress={input_validation}
 						placeholder="10 - Digits"
 						class="input-bordered input focus:outline-none"
 					/>
@@ -37,8 +49,7 @@
 							name="pin"
 							type={state.show_pin ? 'text' : 'password'}
 							inputmode="numeric"
-							on:keypress={numeric}
-							pattern="\d*"
+							on:keypress={input_validation}
 							placeholder="xxxx"
 							class="input-bordered input focus:outline-none"
 						/>

@@ -12,7 +12,7 @@
 	export let data: PageData
 	let placing_order: boolean = false
 
-	const place_order: SubmitFunction = () => {
+	const place_order: SubmitFunction = async () => {
 		placing_order = true
 
 		return async ({ update }) => {
