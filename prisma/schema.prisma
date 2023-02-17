@@ -7,31 +7,43 @@ generator client {
 
 datasource db {
   provider     = "mysql"
-  url          = env("PROD_DATABASE_URL")
+  url          = env("SECRET_DATABASE_URL")
   relationMode = "prisma"
 }
 
 model User {
-  id      String    @id @unique
-  phone   String    @unique
-  name    String
-  address String
-  role    String    @unique @default("USER")
-  orders  Order[]
-  session Session[]
-  key     Key[]
+  id         String       @id @unique
+  phone      String       @unique
+  name       String
+  address    String
+  role       String       @unique @default("USER")
+  orders     Order[]
+  session    Session[]
+  key        Key[]
+  preference Preference[]
 
   @@index([phone])
   @@index([role])
   @@map("user")
 }
 
+model Preference {
+  id                 Int      @id @default(autoincrement())
+  discount           Decimal?
+  theme              String?
+  notification_token String?  @unique
+  user               User     @relation(fields: [user_id], references: [id])
+  user_id            String
+
+  @@index([user_id])
+}
+
 model Session {
   id             String @id @unique
-  user_id        String
   active_expires BigInt
   idle_expires   BigInt
   user           User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+  user_id        String
 
   @@index([user_id])
   @@map("session")
@@ -40,23 +52,24 @@ model Session {
 model Key {
   id              String  @id @unique
   hashed_password String?
-  user_id         String
   primary         Boolean
   user            User    @relation(references: [id], fields: [user_id], onDelete: Cascade)
+  user_id         String
 
   @@index([user_id])
   @@map("key")
 }
 
 model Product {
-  id          Int     @id @default(autoincrement())
-  name        String  @unique
-  brand       String
-  category    String
-  price       Decimal
-  description String?
-  image_url   String
-  items       Item[]
+  id           Int     @id @default(autoincrement())
+  name         String  @unique
+  brand        String
+  category     String
+  price        Decimal
+  description  String?
+  image_url    String
+  search_terms String?
+  items        Item[]
 
   @@index([name])
 }

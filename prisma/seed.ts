@@ -1,7 +1,12 @@
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient()
-
+const prisma = new PrismaClient({
+	datasources: {
+		db: {
+			url: process.env.SECRET_DATABASE_URL
+		}
+	}
+})
 /*
 model Product {
   id          Int     @id @default(autoincrement())
@@ -32,6 +37,9 @@ let links: string[] = [
 ]
 
 async function seed() {
+	await prisma.item.deleteMany()
+	await prisma.order.deleteMany()
+	await prisma.product.deleteMany()
 	for (let i = 0; i < products.length; i++) {
 		await prisma.product.create({
 			data: {
@@ -39,7 +47,8 @@ async function seed() {
 				brand: 'Too Yumm',
 				category: 'Chips',
 				price: 54,
-				image_url: links[i]
+				image_url: links[i],
+				search_terms: `${products[i]} Too Yumm Chips`
 			}
 		})
 	}
