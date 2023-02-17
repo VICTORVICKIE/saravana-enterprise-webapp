@@ -8,10 +8,6 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-.eslintignore
-.eslintrc.cjs
-.prettierignore
-.prettierrc
 .npmrc
 **/*.*~
 notes/
