@@ -1,0 +1,13 @@
+{
+	"files.exclude": {
+		"**/.eslint*": true,
+		// "**/.*rc": true,
+		// "**/.prettierignore": true,
+		"**/venv": true,
+		"**/__pycache__": true,
+		"**/*.*-*": true,
+		"**/*.*~": true
+		// "**/*.config*":true
+	},
+	"typescript.tsdk": "node_modules\\typescript\\lib"
+}
