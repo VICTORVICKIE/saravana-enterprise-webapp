@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { SECRET_INTERNAL_API_KEY } from '$env/static/private'
+	import { PUBLIC_INTERNAL_API_KEY } from '$env/static/public'
 	import { StateColors, States, type State } from '$lib/constants'
 	import type { Order } from '$lib/types'
 
@@ -12,7 +12,7 @@
 		const res = await fetch('/api/orders', {
 			method: 'POST',
 			headers: {
-				Authorization: `Bearer ${SECRET_INTERNAL_API_KEY}`,
+				Authorization: `Bearer ${PUBLIC_INTERNAL_API_KEY}`,
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(data)
