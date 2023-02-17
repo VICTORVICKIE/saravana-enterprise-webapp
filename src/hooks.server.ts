@@ -2,7 +2,13 @@ import { SECRET_INTERNAL_API_KEY } from '$env/static/private'
 import { pwa_themes } from '$lib/constants'
 import { auth } from '$lib/server/lucia'
 import { handleHooks } from '@lucia-auth/sveltekit'
-import { error, redirect, type Handle, type HandleFetch, type HandleServerError } from '@sveltejs/kit'
+import {
+	error,
+	redirect,
+	type Handle,
+	type HandleFetch,
+	type HandleServerError
+} from '@sveltejs/kit'
 import { sequence } from '@sveltejs/kit/hooks'
 
 const theme: Handle = async ({ event, resolve }) => {

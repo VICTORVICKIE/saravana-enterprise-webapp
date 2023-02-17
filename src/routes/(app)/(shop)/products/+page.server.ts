@@ -8,7 +8,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 	const get_products = async () => {
 		const res = await fetch('/api/products', {
 			headers: {
-				'Authorization': `Bearer ${SECRET_INTERNAL_API_KEY}`
+				Authorization: `Bearer ${SECRET_INTERNAL_API_KEY}`
 			}
 		})
 		const data: Product[] = await res.json()

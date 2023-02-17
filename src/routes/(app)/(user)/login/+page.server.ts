@@ -18,7 +18,7 @@ const login: Action = async ({ locals, request }) => {
 		throw fail(400, {
 			error: true,
 			message: 'Invalid Credentials',
-			phone,
+			phone
 		})
 	}
 

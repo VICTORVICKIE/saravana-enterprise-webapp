@@ -30,7 +30,6 @@ export type User = {
 	phone: string
 	address: string
 	role: string
-
 }
 
 export type Preference = {

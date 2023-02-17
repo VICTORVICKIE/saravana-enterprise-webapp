@@ -18,7 +18,7 @@ const firebase_config = {
 	authDomain: PUBLIC_FIREBASE_AUTH_DOMAIN,
 	messagingSenderId: PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
 	projectId: PUBLIC_FIREBASE_PROJECT_ID,
-	storageBucket: PUBLIC_FIREBASE_STORAGE_BUCKET,
+	storageBucket: PUBLIC_FIREBASE_STORAGE_BUCKET
 }
 
 let messaging: Messaging
@@ -31,4 +31,3 @@ if (browser) {
 	storage = getStorage(app)
 }
 export { messaging, storage }
-
