@@ -8,8 +8,8 @@
 	// Updating Total cost and subtotal when quantity is changed
 	$: {
 		for (let list_item of $list_items) {
-			if (list_item.id === item.id) {
-				list_item.subtotal = item.price * item.quantity
+			if (list_item.product.id === item.product.id) {
+				list_item.subtotal = item.product.price * item.quantity
 			}
 		}
 		$total = $list_items.reduce((sum, item) => sum + item.subtotal, 0)
@@ -19,7 +19,7 @@
 <div class="hover:cursor-default hover:bg-transparent">
 	<div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-neutral-focus">
 		<img
-			src={item.image_url}
+			src={item.product.image_url}
 			alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
 			class="h-full w-full object-cover object-center"
 		/>
@@ -28,7 +28,7 @@
 	<div class="ml-4 flex flex-1 flex-col">
 		<div>
 			<div class="flex justify-between text-base font-medium">
-				<h3>{item.name}</h3>
+				<h3>{item.product.name}</h3>
 				<p class="ml-4">₹{item.subtotal}</p>
 			</div>
 		</div>

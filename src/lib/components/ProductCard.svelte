@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { list_items, total } from '$lib/stores/observer'
-	import type { Item } from '$lib/types'
-	import type { Product } from '$lib/types'
+	import type { Item, Product } from '$lib/types'
 	import QuantityCounter from './QuantityCounter.svelte'
 
 	// Item is a product with a quantity
@@ -10,18 +9,18 @@
 
 	let quantity: number = 1
 
-	function add_to_list(product: Item) {
+	function add_to_list(item: Item) {
 		let item_exists = false
 
-		for (let item of $list_items) {
-			if (item.id == product.id) {
-				item.quantity += product.quantity
-				item.subtotal = product.price * item.quantity
+		for (let list_item of $list_items) {
+			if (list_item.product.id == item.product.id) {
+				list_item.quantity += item.quantity
+				list_item.subtotal = item.product.price * list_item.quantity
 				item_exists = true
 			}
 		}
 
-		$list_items = item_exists ? [...$list_items] : [...$list_items, product]
+		$list_items = item_exists ? [...$list_items] : [...$list_items, item]
 		$total = $list_items.reduce((sum, item) => sum + item.subtotal, 0)
 	}
 </script>
@@ -48,7 +47,7 @@
 			<button
 				class="btn-primary btn flex-1 rounded-md"
 				on:click={() => {
-					add_to_list({ ...product, subtotal: product.price, quantity })
+					add_to_list({ product, subtotal: product.price, quantity })
 				}}>Add to List</button
 			>
 		</div>

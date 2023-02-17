@@ -15,7 +15,7 @@
 
 	function update_search_term(event: Event) {
 		const input = event.target as HTMLInputElement
-		search_term.update((search_term) => input.value)
+		$search_term = input.value
 	}
 
 	function toggle_search_bar() {
@@ -92,7 +92,7 @@
 			<!-- Sidebar content here -->
 			{#if data.user?.role !== Roles[0]}
 				<li>
-					<a on:click={() => (state.sidebar = !state.sidebar)} href="/products">Profile</a>
+					<a on:click={() => (state.sidebar = !state.sidebar)} href="/profile">Profile</a>
 				</li>
 				{#if data.user?.role === Roles[2]}
 					<li>

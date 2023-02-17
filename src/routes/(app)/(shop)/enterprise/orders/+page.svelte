@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import OrderCard from '$lib/components/OrderCard.svelte'
 	import type { Order } from '$lib/types'
 	import type { PageData } from './$types'

@@ -1,12 +1,17 @@
+import { SECRET_INTERNAL_API_KEY } from '$env/static/private'
 import { States } from '$lib/constants'
-import type { Item } from '$lib/types'
+import type { Item, Product } from '$lib/types'
 import { redirect } from '@sveltejs/kit'
 import type { Action, Actions, PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	const get_products = async () => {
-		const res = await fetch('/api/products')
-		const data = await res.json()
+		const res = await fetch('/api/products', {
+			headers: {
+				'Authorization': `Bearer ${SECRET_INTERNAL_API_KEY}`
+			}
+		})
+		const data: Product[] = await res.json()
 
 		return data
 	}
@@ -38,7 +43,7 @@ const order: Action = async (event) => {
 			await prisma.item.create({
 				data: {
 					order: { connect: { id: user_order.id } },
-					product: { connect: { id: item.id } },
+					product: { connect: { id: item.product.id } },
 					quantity: item.quantity
 				}
 			})

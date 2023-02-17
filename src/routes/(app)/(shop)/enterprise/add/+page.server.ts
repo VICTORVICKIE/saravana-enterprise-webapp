@@ -21,7 +21,8 @@ const add_product: Action = async ({ request }) => {
 			brand,
 			category,
 			price: parseFloat(price),
-			image_url
+			image_url,
+			search_terms: `${name} ${brand} ${category}`
 		}
 	})
 

@@ -1,14 +1,12 @@
 <script lang="ts">
 	import { enhance, type SubmitFunction } from '$app/forms'
 	import Alert from '$lib/components/Alert.svelte'
-	import { firebase_config } from '$lib/firebase/firebase'
-	import { initializeApp } from 'firebase/app'
+	import { storage } from '$lib/firebase'
 	import type { StorageReference } from 'firebase/storage'
-	import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
+	import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 	import type { ActionData } from './$types'
 
 	let files: FileList
-	const firebase = initializeApp(firebase_config)
 
 	async function upload_image(storage: StorageReference, image: Blob) {
 		await uploadBytes(storage, image)
@@ -16,7 +14,6 @@
 	}
 
 	const add_product: SubmitFunction = async ({ data }) => {
-		const storage = getStorage(firebase)
 		const image = files[0]
 
 		const image_ref = ref(storage, image.name)

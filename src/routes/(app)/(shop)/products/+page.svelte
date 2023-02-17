@@ -5,7 +5,6 @@
 	import ProductCard from '$lib/components/ProductCard.svelte'
 	import { list_items, search_term, state_list, total } from '$lib/stores/observer'
 	import { create_search_store, search_handler } from '$lib/stores/search'
-	import type { Product } from '$lib/types'
 	import { onDestroy } from 'svelte'
 	import type { PageData } from './$types'
 
@@ -22,11 +21,7 @@
 			await update()
 		}
 	}
-	const search_products: Product[] = data.products.map((product: Product) => ({
-		...product,
-		search_terms: `${product.name} ${product.brand} ${product.category}`
-	}))
-	const search_store = create_search_store(search_products)
+	const search_store = create_search_store(data.products)
 	const unsubscribe = search_store.subscribe((model) => search_handler(model))
 	onDestroy(() => {
 		unsubscribe()

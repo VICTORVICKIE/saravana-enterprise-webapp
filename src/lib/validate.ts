@@ -2,6 +2,10 @@ export function input_validation(event: KeyboardEvent) {
     let input = event.target as HTMLInputElement
     let pattern: RegExp;
 
+    if (event.key !== 'Backspace') {
+        input.setAttribute(`data-${input.name}-error`, "")
+    }
+
     switch (input.name) {
         case 'phone':
             pattern = /^\d$/;
@@ -13,7 +17,7 @@ export function input_validation(event: KeyboardEvent) {
             pattern = /^[a-zA-Z0-9\s,.-]+$/;
             break;
         case 'pin':
-        case 'confirm_pin':
+        case 'confirm':
             pattern = /^\d$/;
             break;
         default:
@@ -29,7 +33,7 @@ export function input_validation(event: KeyboardEvent) {
         input.setAttribute(`data-${input.name}-error`, "")
     }
 
-    if (['pin', 'confirm_pin'].includes(input.name) && input.value.length <= 4) {
+    if (['pin', 'confirm'].includes(input.name) && input.value.length <= 4) {
         input.setAttribute(`data-${input.name}-error`, "")
     }
 
@@ -38,8 +42,14 @@ export function input_validation(event: KeyboardEvent) {
         input.removeAttribute(`data-${input.name}-error`)
     }
 
-    if (['pin', 'confirm_pin'].includes(input.name) && input.value.length >= 6) {
+    if (['pin', 'confirm'].includes(input.name) && input.value.length >= 4) {
         event.preventDefault()
         input.removeAttribute(`data-${input.name}-error`)
     }
 }
+
+
+export function paste_validation(event: ClipboardEvent) {
+    let input = event.target as HTMLInputElement
+    input.value = ''
+} 
