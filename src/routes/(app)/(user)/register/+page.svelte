@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
 	import Alert from '$lib/components/Alert.svelte'
-	import { input_validation } from '$lib/validate'
+	import { input_validation, paste_validation } from '$lib/validate'
 	import type { ActionData } from './$types'
 
 	let state = {
@@ -37,18 +37,29 @@
 					<label class="label">
 						<span class="label-text">Phone Number</span>
 					</label>
-					<input
-						name="phone"
-						type="text"
-						inputmode="numeric"
-						on:keypress={input_validation}
-						placeholder="10 - Digits"
-						class="peer input-bordered input focus:outline-none"
-					/>
-					<!-- peer-data-[*error] is used to monitor if its present and show the error, nice little hack using custom validation and tailwind -->
-					<label class="label hidden justify-end peer-data-[phone-error]:flex">
-						<span class="label-text-alt">Minimum 10 digits</span>
-					</label>
+
+					<div class="indicator ">
+						<label class="input-group">
+							<span class="p-2">+91</span>
+							<input
+								id="phone"
+								name="phone"
+								type="text"
+								inputmode="numeric"
+								on:keypress={input_validation}
+								on:keyup={input_validation}
+								on:paste|preventDefault={paste_validation}
+								placeholder="10 - Digits"
+								class="peer input-bordered input focus:outline-none"
+							/>
+							<span
+								class="badge indicator-item hidden translate-x-0 peer-data-[phone-error]:inline-flex"
+								>Required</span
+							>
+						</label>
+					</div>
+
+					<!-- peer-data-[*error]:inline-flex hidden is used to monitor if its present and show the error, nice little hack using custom validation and tailwind -->
 
 					<!-- Address -->
 					<label class="label">
@@ -62,55 +73,74 @@
 					<label class="label hidden justify-end ">
 						<span class="label-text-alt">Alt label</span>
 					</label>
+
 					<!-- Pin -->
 					<label class="label">
 						<span class="label-text">Passcode</span>
 					</label>
-					<div class="input-group">
-						<input
-							name="pin"
-							type={state.pin ? 'text' : 'password'}
-							inputmode="numeric"
-							on:keypress={input_validation}
-							placeholder="xxxx"
-							class="input-bordered input focus:outline-none"
-						/>
-						<button
-							type="button"
-							class="btn-square btn flex-shrink"
-							on:click={() => (state.pin = !state.pin)}
-						>
-							<iconify-icon icon="mdi:eye" width="24" height="24" />
-						</button>
+					<div class="indicator ">
+						<div class="input-group">
+							<input
+								name="pin"
+								type={state.pin ? 'text' : 'password'}
+								inputmode="numeric"
+								on:keypress={input_validation}
+								on:keyup={input_validation}
+								on:paste|preventDefault={paste_validation}
+								placeholder="xxxx"
+								class="peer input-bordered input focus:outline-none"
+							/>
+							<span
+								class="badge indicator-item pointer-events-none hidden translate-x-0 peer-data-[pin-error]:inline-flex"
+								>Required</span
+							>
+							<button
+								type="button"
+								class="btn-square btn flex-shrink"
+								on:click={() => (state.pin = !state.pin)}
+							>
+								<iconify-icon
+									icon="ph:{state.pin ? 'eye-slash-duotone' : 'eye-duotone'}"
+									width="24"
+									height="24"
+								/>
+							</button>
+						</div>
 					</div>
-					<label class="label hidden justify-end peer-data-[pin-error]:flex">
-						<span class="label-text-alt">Minimum 4 digits</span>
-					</label>
 
 					<!-- Confirm Pin -->
 					<label class="label">
 						<span class="label-text">Confirm Passcode</span>
 					</label>
-					<div class="input-group">
-						<input
-							name="confirm_pin"
-							inputmode="numeric"
-							on:keypress={input_validation}
-							type={state.confirm ? 'text' : 'password'}
-							placeholder="xxxx"
-							class="input-bordered input focus:outline-none"
-						/>
-						<button
-							type="button"
-							class="btn-square btn"
-							on:click={() => (state.confirm = !state.confirm)}
-						>
-							<iconify-icon icon="mdi:eye" width="24" height="24" />
-						</button>
+					<div class="indicator ">
+						<div class="input-group">
+							<input
+								name="confirm"
+								type={state.confirm ? 'text' : 'password'}
+								inputmode="numeric"
+								on:keypress={input_validation}
+								on:keyup={input_validation}
+								on:paste|preventDefault={paste_validation}
+								placeholder="xxxx"
+								class="peer input-bordered input focus:outline-none"
+							/>
+							<span
+								class="badge indicator-item pointer-events-none hidden translate-x-0 peer-data-[confirm-error]:inline-flex"
+								>Required</span
+							>
+							<button
+								type="button"
+								class="btn-square btn flex-shrink"
+								on:click={() => (state.confirm = !state.confirm)}
+							>
+								<iconify-icon
+									icon="ph:{state.confirm ? 'eye-slash-duotone' : 'eye-duotone'}"
+									width="24"
+									height="24"
+								/>
+							</button>
+						</div>
 					</div>
-					<label class="label hidden justify-end peer-data-[confirm_pin-error]:flex">
-						<span class="label-text-alt">Minimum 4 digits</span>
-					</label>
 
 					<button type="submit" class="btn-primary btn my-4">Register</button>
 					{#if form?.phone}

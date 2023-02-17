@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 const register: Action = async ({ request }) => {
 	const form_data: FormData = await request.formData()
-	const { name, phone, address, pin, confirm_pin } = Object.fromEntries(form_data) as Record<
+	const { name, phone, address, pin, confirm } = Object.fromEntries(form_data) as Record<
 		string,
 		string
 	>
@@ -23,13 +23,13 @@ const register: Action = async ({ request }) => {
 		typeof phone !== 'string' ||
 		typeof address !== 'string' ||
 		typeof pin !== 'string' ||
-		typeof confirm_pin !== 'string' ||
+		typeof confirm !== 'string' ||
 		!name ||
 		!phone ||
 		!address ||
 		!pin ||
-		!confirm_pin ||
-		pin !== confirm_pin
+		!confirm ||
+		pin !== confirm
 	) {
 		return fail(400, { invalid: true })
 	}
