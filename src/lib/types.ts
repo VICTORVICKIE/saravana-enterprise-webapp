@@ -26,15 +26,18 @@ export type Order = {
 }
 
 export type User = {
-	name: string
-	phone: string
-	address: string
+	[key: string]: unknown
+	id?: string
+	name?: string
+	phone?: string
+	address?: string
 	role: string
+	preference?: Preference
 }
 
 export type Preference = {
-	user: User
-	discount: number
-	theme: string
-	notification_token: string
+	nickname?: string
+	discount?: number
+	theme?: string
+	notification_token?: string
 }

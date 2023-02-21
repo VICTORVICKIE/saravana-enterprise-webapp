@@ -29,7 +29,7 @@
 
 <div class="flex flex-1 justify-center bg-base-200">
 	<div class="my-auto flex-row-reverse">
-		<div class="w-full bg-base-100 p-12">
+		<div class="w-full bg-base-100 px-12 py-8">
 			<!-- svelte-ignore a11y-label-has-associated-control -->
 			<form method="POST" action="?/add_product" use:enhance={add_product}>
 				<div class="grid grid-cols-1 gap-1">

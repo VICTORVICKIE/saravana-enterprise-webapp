@@ -4,7 +4,16 @@ import { json, type RequestHandler } from '@sveltejs/kit'
 
 export const GET: RequestHandler = async () => {
 	const orders = await prisma.order.findMany({
-		include: { user: { select: { phone: true, name: true, address: true } } }
+		include: {
+			user: {
+				select: {
+					phone: true,
+					name: true,
+					address: true,
+					preference: { select: { nickname: true, discount: true } }
+				}
+			}
+		}
 	})
 	return json(orders)
 }

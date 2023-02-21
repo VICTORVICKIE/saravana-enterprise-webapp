@@ -21,7 +21,7 @@
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <label
-	class="swap swap-rotate justify-start pl-4 pt-2 {theme === 'dark' ? '' : 'swap-active'}"
+	class="swap-rotate swap justify-start pl-4 pt-2 {theme === 'dark' ? '' : 'swap-active'}"
 	on:click={set_theme}
 >
 	<iconify-icon class="swap-on" icon="ph:sun-duotone" width={size} height={size} />

@@ -10,7 +10,14 @@ export const GET: RequestHandler = async ({ params }) => {
 		orders = await prisma.order.findUnique({
 			where: { id: order_id },
 			include: {
-				user: { select: { phone: true, name: true, address: true } },
+				user: {
+					select: {
+						phone: true,
+						name: true,
+						address: true,
+						preference: { select: { nickname: true, discount: true } }
+					}
+				},
 				items: { select: { product: true, quantity: true } }
 			}
 		})
