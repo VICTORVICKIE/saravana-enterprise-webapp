@@ -1,15 +1,29 @@
 import { SECRET_INTERNAL_API_KEY } from '$env/static/private'
 import { pwa_themes } from '$lib/constants'
-import { auth } from '$lib/server/lucia'
-import { handleHooks } from '@lucia-auth/sveltekit'
-import {
-	error,
-	redirect,
-	type Handle,
-	type HandleFetch,
-	type HandleServerError
-} from '@sveltejs/kit'
+import { redirect, type Handle } from '@sveltejs/kit'
 import { sequence } from '@sveltejs/kit/hooks'
+
+const user_auth: Handle = async ({ event, resolve }) => {
+	const session = event.cookies.get('session')
+
+	if (!session) {
+		event.locals.user = {
+			role: 'GUEST'
+		}
+		return await resolve(event)
+	}
+
+	const session_data = await prisma.session.findUnique({
+		where: { id: session },
+		select: { user: { select: { id: true, phone: true, role: true, address: true, name: true } } }
+	})
+
+	if (session_data?.user) {
+		event.locals.user = session_data.user
+	}
+
+	return await resolve(event)
+}
 
 const theme: Handle = async ({ event, resolve }) => {
 	const se_theme = event.cookies.get('se_theme') ?? 'dark'
@@ -27,9 +41,8 @@ const theme: Handle = async ({ event, resolve }) => {
 }
 
 const enterprise: Handle = async ({ event, resolve }) => {
-	let { user, session } = await event.locals.validateUser()
 	if (event.url.pathname.startsWith('/enterprise')) {
-		if (!session || user?.role !== 'ADMIN') {
+		if (!event.locals.user.phone || event.locals.user.role !== 'ADMIN') {
 			throw redirect(303, '/products')
 		}
 	}
@@ -46,4 +59,4 @@ const api: Handle = async ({ event, resolve }) => {
 	return await resolve(event)
 }
 
-export const handle: Handle = sequence(handleHooks(auth), api, enterprise, theme)
+export const handle: Handle = sequence(user_auth, api, enterprise, theme)

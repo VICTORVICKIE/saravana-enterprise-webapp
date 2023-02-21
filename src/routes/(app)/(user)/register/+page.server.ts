@@ -1,12 +1,11 @@
 import { Roles } from '$lib/constants'
-import { auth } from '$lib/server/lucia'
 import { prisma } from '$lib/server/prisma'
 import { fail, redirect } from '@sveltejs/kit'
+import bcrypt from 'bcrypt'
 import type { Action, Actions, PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async ({ locals }) => {
-	const session = await locals.validate()
-	if (session) {
+	if (locals.user.phone) {
 		throw redirect(302, '/products')
 	}
 }
@@ -34,25 +33,21 @@ const register: Action = async ({ request }) => {
 		return fail(400, { invalid: true })
 	}
 
-	const user = await prisma.user.findUnique({
+	let existing_user = await prisma.user.findUnique({
 		where: { phone }
 	})
 
-	if (user) {
+	if (existing_user) {
 		return fail(400, { user: true })
 	}
-
-	await auth.createUser({
-		key: {
-			providerId: 'phone',
-			providerUserId: phone,
-			password: pin
-		},
-		attributes: {
+	await prisma.user.create({
+		data: {
 			name,
 			phone,
 			address,
-			role: Roles[1]
+			hashed_password: await bcrypt.hash(pin, 10),
+			role: 'USER',
+			preference: { create: { discount: 0 } }
 		}
 	})
 
