@@ -7,6 +7,7 @@ const prisma = new PrismaClient({
 		}
 	}
 })
+
 /*
 model Product {
   id          Int     @id @default(autoincrement())

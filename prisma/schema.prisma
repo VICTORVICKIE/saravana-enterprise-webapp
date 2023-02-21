@@ -12,52 +12,40 @@ datasource db {
 }
 
 model User {
-  id         String       @id @unique
-  phone      String       @unique
-  name       String
-  address    String
-  role       String       @unique @default("USER")
-  orders     Order[]
-  session    Session[]
-  key        Key[]
-  preference Preference[]
+  id              String      @id @unique @default(uuid())
+  phone           String      @unique
+  name            String
+  address         String
+  role            String      @unique @default("USER")
+  hashed_password String
+  orders          Order[]
+  session         Session[]
+  preference      Preference?
 
   @@index([phone])
   @@index([role])
-  @@map("user")
 }
 
 model Preference {
   id                 Int      @id @default(autoincrement())
+  nickname           String?  @unique
   discount           Decimal?
   theme              String?
   notification_token String?  @unique
   user               User     @relation(fields: [user_id], references: [id])
-  user_id            String
+  user_id            String   @unique
 
   @@index([user_id])
+  @@index([nickname])
 }
 
 model Session {
-  id             String @id @unique
-  active_expires BigInt
-  idle_expires   BigInt
-  user           User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
-  user_id        String
+  id      String @id @unique @default(uuid())
+  expires BigInt
+  user    User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+  user_id String
 
   @@index([user_id])
-  @@map("session")
-}
-
-model Key {
-  id              String  @id @unique
-  hashed_password String?
-  primary         Boolean
-  user            User    @relation(references: [id], fields: [user_id], onDelete: Cascade)
-  user_id         String
-
-  @@index([user_id])
-  @@map("key")
 }
 
 model Product {
