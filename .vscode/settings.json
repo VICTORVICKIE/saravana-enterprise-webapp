@@ -1,7 +1,7 @@
 {
 	"files.exclude": {
 		"**/.eslint*": true,
-		"**/.*rc": true,
+		// "**/.*rc": true,
 		"**/.prettierignore": true,
 		"**/venv": true,
 		"**/__pycache__": true,
