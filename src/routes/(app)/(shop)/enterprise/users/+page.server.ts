@@ -10,7 +10,6 @@ export const load: PageServerLoad = async ({ fetch }) => {
 			}
 		})
 		const data: User[] = await res.json()
-
 		return data
 	}
 
