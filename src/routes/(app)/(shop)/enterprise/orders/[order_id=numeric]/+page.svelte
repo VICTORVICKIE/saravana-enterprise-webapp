@@ -7,7 +7,7 @@
 	let items: Item[] = data.order.items.map(
 		(item: any) =>
 			({
-				...item.product,
+				product:item.product,
 				subtotal: item.product.price * item.quantity,
 				quantity: item.quantity
 			} as Item)

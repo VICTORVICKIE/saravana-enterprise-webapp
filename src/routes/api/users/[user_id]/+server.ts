@@ -1,14 +1,20 @@
 import { prisma } from '$lib/server/prisma'
+import { hash } from '$lib/validate'
 import { json, type RequestHandler } from '@sveltejs/kit'
-import bcrypt from 'bcrypt'
 
 export const POST: RequestHandler = async ({ params, request, locals, cookies }) => {
 	const user_data = await request.json()
 
-	if (typeof params.user_id === 'string' && params.user_id === locals.user.id) {
+	const referer = request.headers.get('referer')
+
+	if (referer && referer.includes('enterprise')) {
+		await prisma.user.update({ data: { preference: { update: user_data.preference } }, where: { phone: user_data.phone } })
+	}
+
+	if (typeof params.user_id === 'string' && params.user_id === locals.user.id && referer && referer.includes('profile')) {
 		if ('pin' in user_data) {
 			await prisma.user.update({
-				data: { hashed_password: await bcrypt.hash(user_data.pin, 10) },
+				data: { hashed_password: await hash(user_data.pin) },
 				where: { phone: locals.user.phone }
 			})
 			await prisma.session.deleteMany({ where: { user_id: locals.user.id } })
@@ -23,9 +29,12 @@ export const POST: RequestHandler = async ({ params, request, locals, cookies })
 				secure: process.env.NODE_ENV === 'production',
 				maxAge: 60 * 60 * 24 * 30 * 12
 			})
-		} else {
+		}
+
+		else {
 			await prisma.user.update({ data: user_data, where: { phone: locals.user.phone } })
 		}
+
 	}
 	return json({ Test: 'Test' })
 }

@@ -52,3 +52,15 @@ export function paste_validation(event: ClipboardEvent) {
 	let input = event.target as HTMLInputElement
 	input.value = ''
 }
+
+export async function hash(pin: string) {
+	const encoded_pin = new TextEncoder().encode(pin)
+	const buffer_pin = await crypto.subtle.digest('SHA-512', encoded_pin)
+	const hashed_pin = Array.from(new Uint8Array(buffer_pin))
+	const hex_pin = hashed_pin.map((x) => x.toString(16).padStart(2, '0')).join('')
+	return hex_pin
+}
+
+export async function compare(pin: string, pin_hash: string) {
+	return await hash(pin) === pin_hash
+}

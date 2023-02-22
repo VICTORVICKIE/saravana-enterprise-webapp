@@ -1,26 +1,27 @@
 import { SECRET_INTERNAL_API_KEY } from '$env/static/private'
 import { pwa_themes } from '$lib/constants'
+import { prisma } from '$lib/server/prisma'
 import { redirect, type Handle } from '@sveltejs/kit'
 import { sequence } from '@sveltejs/kit/hooks'
 
 const user_auth: Handle = async ({ event, resolve }) => {
 	const session = event.cookies.get('session')
+	let session_data
+	if (session) {
+		session_data = await prisma.session.findUnique({
+			where: { id: session },
+			select: { user: { select: { id: true, phone: true, role: true, address: true, name: true } } }
+		})
+	}
 
-	if (!session) {
+	if (!session_data) {
 		event.locals.user = {
 			role: 'GUEST'
 		}
 		return await resolve(event)
 	}
 
-	const session_data = await prisma.session.findUnique({
-		where: { id: session },
-		select: { user: { select: { id: true, phone: true, role: true, address: true, name: true } } }
-	})
-
-	if (session_data?.user) {
-		event.locals.user = session_data.user
-	}
+	event.locals.user = session_data.user
 
 	return await resolve(event)
 }

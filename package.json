@@ -48,7 +48,6 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "^4.9.0",
-		"bcrypt": "^5.1.0",
 		"daisyui": "^2.47.0",
 		"firebase": "^9.17.1",
 		"iconify-icon": "^1.0.3"

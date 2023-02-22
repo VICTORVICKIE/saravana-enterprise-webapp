@@ -32,7 +32,7 @@
 	})
 </script>
 
-<div class="drawer drawer-end">
+<div class="drawer drawer-end h-[91vh] ">
 	<input id="my-drawer-4" type="checkbox" class="drawer-toggle" bind:checked={$state_list} />
 	<div class="drawer-content">
 		<!-- Product -->

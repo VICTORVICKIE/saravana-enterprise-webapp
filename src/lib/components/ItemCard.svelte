@@ -7,7 +7,7 @@
 <tr class="hover h-28 hover:cursor-pointer">
 	<td>
 		<img src={item.product.image_url} alt={item.product.name} class="inline h-24 w-24" />
-		{item.product.name}
+		<br />{item.product.name}
 	</td>
 	<td class="text-center">₹{item.product.price}</td>
 	<td class="text-center">x {item.quantity}</td>

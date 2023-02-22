@@ -12,11 +12,11 @@ datasource db {
 }
 
 model User {
-  id              String      @id @unique @default(uuid())
+  id              String      @id @default(uuid())
   phone           String      @unique
   name            String
   address         String
-  role            String      @unique @default("USER")
+  role            String      @default("USER")
   hashed_password String
   orders          Order[]
   session         Session[]
@@ -32,15 +32,14 @@ model Preference {
   discount           Decimal?
   theme              String?
   notification_token String?  @unique
-  user               User     @relation(fields: [user_id], references: [id])
+  user               User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id            String   @unique
 
   @@index([user_id])
-  @@index([nickname])
 }
 
 model Session {
-  id      String @id @unique @default(uuid())
+  id      String @id @default(uuid())
   expires BigInt
   user    User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
   user_id String
@@ -85,7 +84,7 @@ enum State {
 
 model Item {
   id         Int     @id @default(autoincrement())
-  order      Order   @relation(fields: [order_id], references: [id])
+  order      Order   @relation(fields: [order_id], references: [id], onDelete: Cascade)
   order_id   Int
   product    Product @relation(fields: [product_id], references: [id])
   product_id Int

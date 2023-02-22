@@ -9,8 +9,19 @@ export const load: PageServerLoad = async ({ fetch }) => {
 				Authorization: `Bearer ${SECRET_INTERNAL_API_KEY}`
 			}
 		})
-		const data: User[] = await res.json()
-		return data
+		let data = await res.json()
+
+		let users: User[] = data.map((user: { preference: { discount: string } }) => {
+			return {
+				...user,
+				preference: {
+					...user.preference,
+					discount: parseFloat(user.preference?.discount)
+				}
+			}
+		})
+
+		return users
 	}
 
 	return { users: get_users() }

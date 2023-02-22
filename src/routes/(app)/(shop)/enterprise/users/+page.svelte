@@ -12,10 +12,9 @@
 		<!-- head -->
 		<thead>
 			<tr>
-				<th>Name</th>
-				<th>Phone</th>
+				<th>Shop</th>
 				<th>Address</th>
-				<th>Discount</th>
+				<th>Discount %</th>
 			</tr>
 		</thead>
 		<tbody>

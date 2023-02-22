@@ -1,10 +1,11 @@
+import { Roles } from '$lib/constants'
 import { prisma } from '$lib/server/prisma'
+import { compare } from '$lib/validate'
 import { fail, redirect } from '@sveltejs/kit'
-import bcrypt from 'bcrypt'
 import type { Action, Actions, PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async ({ locals }) => {
-	if (locals.user.phone) {
+	if (locals.user.role !== Roles[0]) {
 		throw redirect(302, '/products')
 	}
 }
@@ -27,7 +28,7 @@ const login: Action = async ({ cookies, request }) => {
 		return fail(400, { credentials: true })
 	}
 
-	const valid_password = await bcrypt.compare(pin, user.hashed_password)
+	const valid_password = await compare(pin, user.hashed_password)
 
 	if (!valid_password) {
 		return fail(400, { credentials: true })
