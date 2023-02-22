@@ -30,6 +30,7 @@ specifiers:
   typescript: ^4.9.4
   vite: ^4.0.0
   vite-plugin-pwa: ^0.14.1
+  workbox-window: ^6.5.4
 
 dependencies:
   '@prisma/client': 4.10.1_prisma@4.10.1
@@ -62,7 +63,8 @@ devDependencies:
   tslib: 2.4.1
   typescript: 4.9.4
   vite: 4.0.4_@types+node@18.11.19
-  vite-plugin-pwa: 0.14.1_vite@4.0.4
+  vite-plugin-pwa: 0.14.1_aln3rhi4rqbizqxdkcc2hwlswu
+  workbox-window: 6.5.4
 
 packages:
 
@@ -2495,7 +2497,7 @@ packages:
       vite-plugin-pwa: ^0.14.0
     dependencies:
       '@sveltejs/kit': 1.8.3_svelte@3.55.1+vite@4.0.4
-      vite-plugin-pwa: 0.14.1_vite@4.0.4
+      vite-plugin-pwa: 0.14.1_aln3rhi4rqbizqxdkcc2hwlswu
     dev: true
 
   /abbrev/1.1.1:
@@ -5717,10 +5719,11 @@ packages:
   /v8-compile-cache-lib/3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
-  /vite-plugin-pwa/0.14.1_vite@4.0.4:
+  /vite-plugin-pwa/0.14.1_aln3rhi4rqbizqxdkcc2hwlswu:
     resolution: {integrity: sha512-5zx7yhQ8RTLwV71+GA9YsQQ63ALKG8XXIMqRJDdZkR8ZYftFcRgnzM7wOWmQZ/DATspyhPih5wCdcZnAIsM+mA==}
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0
+      workbox-window: ^6.5.4
     dependencies:
       '@rollup/plugin-replace': 5.0.2_rollup@3.10.1
       debug: 4.3.4
