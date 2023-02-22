@@ -17,6 +17,7 @@ const config: UserConfig = {
 				description: 'Saravana Enterprise Order App',
 				theme_color: '#000000',
 				display: 'standalone',
+				start_url: '/',
 				icons: [
 					{
 						src: 'icons/android-chrome-192x192.png',
