@@ -32,7 +32,7 @@
 	<td on:click={goto_order}>{order.id}</td>
 	<td on:click={goto_order}>{order.user.name}</td>
 	<td on:click={goto_order}>₹{order.total}</td>
-	<td on:click={goto_order}><div class="badge-{color} badge w-24 gap-2">{text}</div></td>
+	<td on:click={goto_order}><div class="badge-{color} badge badge-sm w-20 gap-2">{text}</div></td>
 	<td>
 		<input
 			on:change={submit_state}
@@ -40,7 +40,7 @@
 			min="1"
 			max="3"
 			bind:value
-			class="range range-{color} w-24"
+			class="range range-xs align-middle range-{color} w-16"
 			step="1"
 		/>
 	</td>

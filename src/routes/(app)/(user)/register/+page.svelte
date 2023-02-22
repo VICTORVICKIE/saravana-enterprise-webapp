@@ -21,12 +21,12 @@
 					<h1 class="mb-4 text-center text-2xl">Register</h1>
 					<!-- Name -->
 					<label class="label">
-						<span class="label-text">Name</span>
+						<span class="label-text">Shop Name</span>
 					</label>
 					<input
 						name="name"
 						type="text"
-						placeholder="Name"
+						placeholder="Shop Name"
 						class="input-bordered input focus:outline-none"
 					/>
 					<label class="label hidden justify-end">

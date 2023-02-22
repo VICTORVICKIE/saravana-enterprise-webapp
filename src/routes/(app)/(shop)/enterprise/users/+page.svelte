@@ -4,7 +4,6 @@
 	import type { PageData } from './$types'
 
 	export let data: PageData
-	let users: User[] = data.users
 </script>
 
 <div class="flex overflow-x-auto">
@@ -14,11 +13,10 @@
 			<tr>
 				<th>Shop</th>
 				<th>Address</th>
-				<th>Discount %</th>
 			</tr>
 		</thead>
 		<tbody>
-			{#each users as user}
+			{#each data.users as user}
 				<ShopCard {user} />
 			{/each}
 		</tbody>
