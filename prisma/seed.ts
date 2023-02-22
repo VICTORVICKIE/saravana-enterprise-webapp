@@ -72,8 +72,7 @@ async function seed() {
 				phone,
 				address,
 				hashed_password: await hash(pin),
-				role,
-				preference: { create: { discount } }
+				role
 			}
 		})
 	}

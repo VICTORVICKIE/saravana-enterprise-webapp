@@ -45,8 +45,7 @@ const register: Action = async ({ request }) => {
 			name,
 			phone,
 			address,
-			hashed_password: await hash(pin),
-			preference: { create: { discount: 0 } }
+			hashed_password: await hash(pin)
 		}
 	})
 

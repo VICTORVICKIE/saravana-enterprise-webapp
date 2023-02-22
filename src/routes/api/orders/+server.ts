@@ -9,8 +9,7 @@ export const GET: RequestHandler = async () => {
 				select: {
 					phone: true,
 					name: true,
-					address: true,
-					preference: { select: { nickname: true, discount: true } }
+					address: true
 				}
 			}
 		}
@@ -20,6 +19,7 @@ export const GET: RequestHandler = async () => {
 
 export const POST: RequestHandler = async ({ request }) => {
 	const order_data = await request.json()
+	
 	const order_state = States[order_data.value]
 
 	await prisma.order.update({ where: { id: order_data.order_id }, data: { state: order_state } })

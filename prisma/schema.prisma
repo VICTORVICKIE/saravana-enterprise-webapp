@@ -12,30 +12,18 @@ datasource db {
 }
 
 model User {
-  id              String      @id @default(uuid())
-  phone           String      @unique
+  id              String    @id @default(uuid())
+  phone           String    @unique
   name            String
   address         String
-  role            String      @default("USER")
+  role            String    @default("USER")
+  notify_token    String?   @unique
   hashed_password String
   orders          Order[]
   session         Session[]
-  preference      Preference?
 
   @@index([phone])
   @@index([role])
-}
-
-model Preference {
-  id                 Int      @id @default(autoincrement())
-  nickname           String?  @unique
-  discount           Decimal?
-  theme              String?
-  notification_token String?  @unique
-  user               User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id            String   @unique
-
-  @@index([user_id])
 }
 
 model Session {

@@ -14,8 +14,7 @@ export const GET: RequestHandler = async ({ params }) => {
 					select: {
 						phone: true,
 						name: true,
-						address: true,
-						preference: { select: { nickname: true, discount: true } }
+						address: true
 					}
 				},
 				items: { select: { product: true, quantity: true } }

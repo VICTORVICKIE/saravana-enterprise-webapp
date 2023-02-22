@@ -7,10 +7,6 @@ export const POST: RequestHandler = async ({ params, request, locals, cookies })
 
 	const referer = request.headers.get('referer')
 
-	if (referer && referer.includes('enterprise')) {
-		await prisma.user.update({ data: { preference: { update: user_data.preference } }, where: { phone: user_data.phone } })
-	}
-
 	if (typeof params.user_id === 'string' && params.user_id === locals.user.id && referer && referer.includes('profile')) {
 		if ('pin' in user_data) {
 			await prisma.user.update({
