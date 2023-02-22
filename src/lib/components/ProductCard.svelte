@@ -34,7 +34,7 @@
 	</div>
 	<!--TODO: Need to work on image here later -->
 	<figure class="px-8">
-		<img src={product.image_url} alt="Shoes" class="h-40 rounded-md" />
+		<img src={product.image_url} alt={product.name} class="h-40 rounded-md" />
 	</figure>
 	<div class="card-body gap-4">
 		<div class="card-actions items-center justify-between">

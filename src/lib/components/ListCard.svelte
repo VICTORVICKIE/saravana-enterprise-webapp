@@ -20,7 +20,7 @@
 	<div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-neutral-focus">
 		<img
 			src={item.product.image_url}
-			alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
+			alt={item.product.name}
 			class="h-full w-full object-cover object-center"
 		/>
 	</div>
