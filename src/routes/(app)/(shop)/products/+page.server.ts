@@ -1,6 +1,6 @@
 import { SECRET_INTERNAL_API_KEY } from '$env/static/private'
 import { States } from '$lib/constants'
-import type { Item, Product } from '$lib/types'
+import { ProductKeys, type Item, type Product } from '$lib/types'
 import { redirect } from '@sveltejs/kit'
 import type { Action, Actions, PageServerLoad } from './$types'
 
@@ -11,7 +11,19 @@ export const load: PageServerLoad = async ({ fetch }) => {
 				Authorization: `Bearer ${SECRET_INTERNAL_API_KEY}`
 			}
 		})
-		const data: Product[] = await res.json()
+		const data = await res.json()
+
+		if (data) {
+			data.forEach((product: any) => {
+
+				if (product && typeof product === 'object' && ProductKeys.every((key) => key in product)) {
+					product.id = parseInt(product.id)
+					product.price = parseFloat(product.price)
+				}
+
+			})
+
+		}
 
 		return data
 	}

@@ -11,17 +11,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 		})
 		let data = await res.json()
 
-		let users: User[] = data.map((user: { preference: { discount: string } }) => {
-			return {
-				...user,
-				preference: {
-					...user.preference,
-					discount: parseFloat(user.preference?.discount)
-				}
-			}
-		})
-
-		return users
+		return data as User[]
 	}
 
 	return { users: get_users() }

@@ -1,5 +1,5 @@
 import { SECRET_INTERNAL_API_KEY } from '$env/static/private'
-import type { Order } from '$lib/types'
+import { OrderKeys, type Order } from '$lib/types'
 import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async ({ fetch }) => {
@@ -9,14 +9,19 @@ export const load: PageServerLoad = async ({ fetch }) => {
 				Authorization: `Bearer ${SECRET_INTERNAL_API_KEY}`
 			}
 		})
-		const data: Order[] = await res.json()
+		const data = await res.json()
 
-		data.forEach((order) => {
-			order.ordered_at = new Date(order.ordered_at).toLocaleString()
-			order.updated_at = new Date(order.updated_at).toLocaleString()
-		})
-
-		return data.reverse()
+		if (data) {
+			for (const order of data) {
+				if (order && typeof order === 'object' && OrderKeys.every((key) => key in order)) {
+					order.id = parseInt(order.id)
+					order.total = parseFloat(order.total)
+					order.ordered_at = new Date(order.ordered_at).toLocaleString()
+					order.updated_at = new Date(order.updated_at).toLocaleString()
+				}
+			}
+		}
+		return data.reverse() as Order[]
 	}
 
 	return { orders: get_orders() }
