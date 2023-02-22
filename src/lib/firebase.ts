@@ -9,7 +9,7 @@ import {
 } from '$env/static/public'
 
 import { initializeApp, type FirebaseApp } from 'firebase/app'
-import { getMessaging, type Messaging } from 'firebase/messaging'
+// import { getMessaging, type Messaging } from 'firebase/messaging'
 import { getStorage, type FirebaseStorage } from 'firebase/storage'
 
 const firebase_config = {
@@ -21,13 +21,13 @@ const firebase_config = {
 	storageBucket: PUBLIC_FIREBASE_STORAGE_BUCKET
 }
 
-let messaging: Messaging
+// let messaging: Messaging
 let storage: FirebaseStorage
 
 if (browser) {
 	const app: FirebaseApp = initializeApp(firebase_config)
 
-	messaging = getMessaging(app)
+	// messaging = getMessaging(app)
 	storage = getStorage(app)
 }
-export { messaging, storage }
+export { storage }
