@@ -44,9 +44,6 @@ const config: UserConfig = {
 					}
 				]
 			},
-			injectManifest: {
-				globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}']
-			},
 		})
 	]
 }
