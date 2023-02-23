@@ -26,7 +26,7 @@
 			</div>
 			<div class="mx-2 flex-1 px-2 text-2xl normal-case">Saravana Enterprise</div>
 			<div class="hidden flex-none lg:block">
-				<ul class="menu menu-horizontal">
+				<ul  class="menu menu-horizontal">
 					<!-- Navbar menu content here -->
 					<li><a href="/login">Login</a></li>
 					<li><a href="/register">Register</a></li>

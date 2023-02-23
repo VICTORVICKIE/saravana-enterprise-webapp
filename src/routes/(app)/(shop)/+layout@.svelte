@@ -109,7 +109,7 @@
 					</li>
 				{/if}
 				<li>
-					<form action="/logout" method="POST">
+					<form data-sveltekit-preload-data="off" action="/logout" method="POST">
 						<button
 							class="w-full text-start"
 							on:click={() => (state.sidebar = !state.sidebar)}
