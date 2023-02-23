@@ -4,8 +4,7 @@ import type { UserConfig } from 'vite'
 
 const config: UserConfig = {
 	define: {
-		__DATE__: `'${new Date().toLocaleString()}'`,
-		__RELOAD_SW__: false,
+		__DATE__: `'${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}'`,
 	},
 	plugins: [
 		sveltekit(),
@@ -18,12 +17,14 @@ const config: UserConfig = {
 			// 	enabled: true,
 			// },
 			strategies: 'generateSW',
+			registerType: 'autoUpdate',
 			manifest: {
 				name: 'Saravana Enterprise',
 				short_name: 'Saravana Enterprise',
 				description: 'Saravana Enterprise Order App',
 				theme_color: '#000000',
 				display: 'standalone',
+				start_url: '/',
 				icons: [
 					{
 						src: 'icons/android-chrome-192x192.png',
