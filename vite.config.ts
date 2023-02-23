@@ -13,11 +13,7 @@ const config: UserConfig = {
 			scope: '/',
 			base: '/',
 			includeAssets: ['fonts/*.*', 'images/*.png'],
-			// devOptions: {
-			// 	enabled: true,
-			// },
-			strategies: 'injectManifest',
-			filename: 'prompt-sw.ts',
+			registerType: 'autoUpdate',
 			manifest: {
 				name: 'Saravana Enterprise',
 				short_name: 'Saravana Enterprise',

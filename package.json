@@ -16,7 +16,7 @@
 		"seed": "node --loader ts-node/esm prisma/seed.ts"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-netlify": "^1.0.5",
+		"@sveltejs/adapter-auto": "^1.0.0",
 		"@sveltejs/kit": "^1.0.0",
 		"@types/node": "^18.11.19",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",

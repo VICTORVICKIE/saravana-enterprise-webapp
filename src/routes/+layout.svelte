@@ -8,12 +8,16 @@
 	//@ts-ignore
 	let build_date = __DATE__
 
-	let ReloadPrompt: ComponentType
 	onMount(async () => {
-		pwaInfo && (ReloadPrompt = (await import('$lib/components/ReloadPrompt.svelte')).default)
-	})
-
-	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : ''
+    if (pwaInfo) {
+      const { registerSW } = await import('virtual:pwa-register')
+      registerSW({
+        immediate: true,
+      })
+    }
+  })
+  
+  $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : ''
 </script>
 
 <svelte:head>
@@ -29,6 +33,3 @@
 		</div>
 	</div>
 </div>
-{#if ReloadPrompt}
-	<svelte:component this={ReloadPrompt} />
-{/if}
