@@ -42,6 +42,14 @@ const config: UserConfig = {
 						purpose: 'any maskable'
 					}
 				]
+			},
+			workbox: {
+				// Use network-only strategy for all requests
+				runtimeCaching: [{
+					urlPattern: /.*$/,
+					handler: 'NetworkOnly'
+				}],
+				// any other workbox options you may need
 			}
 		})
 	]
