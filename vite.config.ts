@@ -14,6 +14,9 @@ const config: UserConfig = {
 			base: '/',
 			includeAssets: ['fonts/*.*', 'images/*.png'],
 			registerType: 'autoUpdate',
+			workbox: {
+				
+			},
 			manifest: {
 				name: 'Saravana Enterprise',
 				short_name: 'Saravana Enterprise',

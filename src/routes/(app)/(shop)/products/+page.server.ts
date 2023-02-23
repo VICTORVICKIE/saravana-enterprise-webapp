@@ -20,9 +20,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 					product.id = parseInt(product.id)
 					product.price = parseFloat(product.price)
 				}
-
 			})
-
 		}
 
 		return data

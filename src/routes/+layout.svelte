@@ -8,16 +8,17 @@
 	//@ts-ignore
 	let build_date = __DATE__
 
+	console.log(build_date)
 	onMount(async () => {
-    if (pwaInfo) {
-      const { registerSW } = await import('virtual:pwa-register')
-      registerSW({
-        immediate: true,
-      })
-    }
-  })
-  
-  $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : ''
+		if (pwaInfo) {
+			const { registerSW } = await import('virtual:pwa-register')
+			registerSW({
+				immediate: true
+			})
+		}
+	})
+
+	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : ''
 </script>
 
 <svelte:head>
@@ -25,11 +26,3 @@
 </svelte:head>
 
 <slot />
-
-<div class="toast">
-	<div class="alert alert-info">
-		<div>
-			<span>{build_date}</span>
-		</div>
-	</div>
-</div>
