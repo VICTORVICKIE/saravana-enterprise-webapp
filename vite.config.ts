@@ -16,8 +16,8 @@ const config: UserConfig = {
 			// devOptions: {
 			// 	enabled: true,
 			// },
-			strategies: 'generateSW',
-			registerType: 'autoUpdate',
+			strategies: 'injectManifest',
+			filename: 'prompt-sw.ts',
 			manifest: {
 				name: 'Saravana Enterprise',
 				short_name: 'Saravana Enterprise',
@@ -44,14 +44,9 @@ const config: UserConfig = {
 					}
 				]
 			},
-			workbox: {
-				// Use network-only strategy for all requests
-				runtimeCaching: [{
-					urlPattern: /.*$/,
-					handler: 'NetworkOnly'
-				}],
-				// any other workbox options you may need
-			}
+			injectManifest: {
+				globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}']
+			},
 		})
 	]
 }
