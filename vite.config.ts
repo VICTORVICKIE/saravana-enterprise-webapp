@@ -3,6 +3,10 @@ import { SvelteKitPWA } from '@vite-pwa/sveltekit'
 import type { UserConfig } from 'vite'
 
 const config: UserConfig = {
+	define: {
+		__DATE__: `'${new Date().toLocaleString()}'`,
+		__RELOAD_SW__: false,
+	},
 	plugins: [
 		sveltekit(),
 		SvelteKitPWA({
@@ -10,7 +14,10 @@ const config: UserConfig = {
 			scope: '/',
 			base: '/',
 			includeAssets: ['fonts/*.*', 'images/*.png'],
-			registerType: 'autoUpdate',
+			// devOptions: {
+			// 	enabled: true,
+			// },
+			strategies: 'generateSW',
 			manifest: {
 				name: 'Saravana Enterprise',
 				short_name: 'Saravana Enterprise',
