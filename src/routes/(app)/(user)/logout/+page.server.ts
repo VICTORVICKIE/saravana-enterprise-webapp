@@ -13,8 +13,9 @@ export const actions: Actions = {
 		}
 
 		const session = cookies.get('session')
+		console.log(session)
 		await prisma.session.delete({ where: { id: session } })
-
+		console.log("after")
 		cookies.delete('session', {
 			path: '/'
 		})
