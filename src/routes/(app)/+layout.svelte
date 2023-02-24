@@ -24,7 +24,7 @@
 					<iconify-icon icon="ph:list-duotone" width="24" height="24" />
 				</button>
 			</div>
-			<div class="mx-2 flex-1 px-2 text-2xl normal-case">Saravana Enterprise</div>
+			<div class="mx-2 flex-1 px-2 text-xl normal-case">Saravana Enterprise</div>
 			<div class="hidden flex-none lg:block">
 				<ul  class="menu menu-horizontal">
 					<!-- Navbar menu content here -->

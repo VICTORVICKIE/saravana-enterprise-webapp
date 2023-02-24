@@ -1,3 +1,4 @@
+import { prisma } from '$lib/server/prisma'
 import { fail, redirect, type Action, type Actions } from '@sveltejs/kit'
 
 const add_product: Action = async ({ request }) => {

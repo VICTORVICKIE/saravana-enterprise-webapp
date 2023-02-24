@@ -2,7 +2,7 @@
 	import { page } from '$app/stores'
 	import ThemeToggleButton from '$lib/components/ThemeToggleButton.svelte'
 	import { Roles } from '$lib/constants'
-	import { search_term, state_list } from '$lib/stores/observer'
+	import { search_term } from '$lib/stores/observer'
 	import type { LayoutData } from './$types'
 
 	export let data: LayoutData
@@ -10,6 +10,8 @@
 		sidebar: false,
 		search: false
 	}
+
+	$: path = $page.url.pathname
 
 	let search_group: HTMLDivElement
 
@@ -46,40 +48,45 @@
 				</button>
 			</div>
 			<div
-				class="mx-2 flex-1 px-2 text-2xl normal-case {state.search ? 'hidden' : 'block'} md:block"
+				class="mx-2 flex-1 px-2 text-xl normal-case {state.search ? 'hidden' : 'block'} md:block"
 			>
 				Saravana Enterprise
 			</div>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<iconify-icon
-				class="hover:cursor-pointer lg:hidden {state.search ? 'hidden' : 'block'}"
-				icon="ph:magnifying-glass-duotone"
-				width="36"
-				height="36"
-				on:click={toggle_search_bar}
-			/>
-			<div class="flex-none gap-2">
-				<div class="form-control">
-					<div bind:this={search_group} class="input-group hidden h-9 lg:block">
-						<button on:click={toggle_search_bar} class="btn-square btn h-9 min-h-0 w-9 lg:hidden">
-							<iconify-icon icon="ph:x-duotone" width="36" height="36" />
-						</button>
-						<input
-							type="search"
-							placeholder="Search..."
-							class="input-bordered input h-9 focus:outline-none"
-							on:input={update_search_term}
-						/>
-					</div>
-				</div>
-			</div>
-			<button on:click={() => state_list.update((x) => !x)}>
+			{#if path === '/products'}
 				<iconify-icon
-					icon="ph:{$state_list ? 'note-pencil' : 'notepad'}-duotone"
+					class="hover:cursor-pointer lg:hidden {state.search ? 'hidden' : 'block'}"
+					icon="ph:magnifying-glass-duotone"
 					width="36"
 					height="36"
+					on:click={toggle_search_bar}
 				/>
-			</button>
+				<div class="flex-none gap-2">
+					<div class="form-control">
+						<div bind:this={search_group} class="input-group-xs input-group hidden h-9 lg:block">
+							<button
+								on:click={toggle_search_bar}
+								class="btn-square btn-xs btn h-9 min-h-0 w-9 lg:hidden"
+							>
+								<iconify-icon icon="ph:x-duotone" width="36" height="36" />
+							</button>
+							<input
+								type="search"
+								placeholder="Search..."
+								class="input-bordered input input-xs h-9 focus:outline-none"
+								on:input={update_search_term}
+							/>
+						</div>
+					</div>
+				</div>
+			{/if}
+			<a href={path !== '/products' ? '/products' : '/list'}
+				><iconify-icon
+					icon="ph:{path !== '/products' ? 'note-pencil' : 'notepad'}-duotone"
+					width="36"
+					height="36"
+				/></a
+			>
 		</div>
 
 		<!-- Page content here -->
@@ -101,13 +108,12 @@
 						>
 					</li>
 					<li>
-						<a on:click={() => (state.sidebar = !state.sidebar)} href="/enterprise/orders">Orders</a
-						>
-					</li>
-					<li>
 						<a on:click={() => (state.sidebar = !state.sidebar)} href="/enterprise/users">Shops</a>
 					</li>
 				{/if}
+				<li>
+					<a on:click={() => (state.sidebar = !state.sidebar)} href="/orders">Orders</a>
+				</li>
 				<li>
 					<form action="/logout" method="POST">
 						<button

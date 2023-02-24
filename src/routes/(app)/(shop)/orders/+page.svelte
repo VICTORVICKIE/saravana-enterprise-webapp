@@ -16,7 +16,9 @@
 					<th>Shop</th>
 					<th>Total</th>
 					<th>Status</th>
-					<th />
+					{#if data.user.role === 'ADMIN'}
+						<th />
+					{/if}
 				</tr>
 			</thead>
 			<tbody>

@@ -33,45 +33,8 @@
 	})
 </script>
 
-<div class="drawer drawer-end h-[91vh] ">
-	<input id="my-drawer-4" type="checkbox" class="drawer-toggle" bind:checked={$state_list} />
-	<div class="drawer-content">
-		<!-- Product -->
-
-		<!-- grid-cols-fit is a custom extension applied in tailwind.config.cjs -->
-		<div class="grid grid-cols-fit gap-2 bg-base-200">
-			{#each $search_store.filtered as product}
-				<ProductCard {product} />
-			{/each}
-		</div>
-	</div>
-	<div class="drawer-side">
-		<label for="my-drawer-4" class="drawer-overlay" />
-
-		<div class="menu w-96 bg-base-100">
-			<Alert content="List" />
-			<ul class="h-[74vh] divide-y divide-neutral overflow-auto p-4">
-				{#each $list_items as item}
-					<li><ListCard {item} /></li>
-				{/each}
-			</ul>
-			<div class="sticky bottom-0 w-full border border-neutral-focus bg-base-100 p-4">
-				<div class="flex justify-between">
-					<p>Total</p>
-					<p>₹{$total}</p>
-				</div>
-				<form method="POST" action="?/order" use:enhance={place_order}>
-					<input type="hidden" name="items" value={JSON.stringify($list_items)} />
-					<input type="hidden" name="total" value={JSON.stringify($total)} />
-
-					<button class="btn mt-4 w-full" disabled={placing_order}>
-						{#if placing_order}
-							<iconify-icon icon="eos-icons:loading" width="24" height="24" />
-						{/if}
-						Order</button
-					>
-				</form>
-			</div>
-		</div>
-	</div>
+<div class="grid grid-cols-fit gap-2 bg-base-200">
+	{#each $search_store.filtered as product}
+		<ProductCard {product} />
+	{/each}
 </div>

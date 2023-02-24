@@ -1,7 +1,7 @@
 {
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
-		 "lib": ["dom", "webworker"],
+		 "lib": [ "es5", "es6","dom.iterable", "dom", "webworker"],
 		"allowJs": true,
 		"checkJs": true,
 		"esModuleInterop": true,
