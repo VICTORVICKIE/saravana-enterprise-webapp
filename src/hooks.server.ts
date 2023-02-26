@@ -1,7 +1,8 @@
 import { SECRET_INTERNAL_API_KEY } from '$env/static/private'
 import { pwa_themes } from '$lib/constants'
 import { prisma } from '$lib/server/prisma'
-import { redirect, type Handle } from '@sveltejs/kit'
+import type { Handle, HandleServerError } from '@sveltejs/kit'
+import { redirect } from '@sveltejs/kit'
 import { sequence } from '@sveltejs/kit/hooks'
 
 const user_auth: Handle = async ({ event, resolve }) => {
@@ -59,5 +60,15 @@ const api: Handle = async ({ event, resolve }) => {
 	// }
 	return await resolve(event)
 }
+
+export const handleError = (({ error, event }) => {
+	const errorId = crypto.randomUUID();
+	console.log(error)
+	return {
+		message: 'Whoops!',
+		errorId
+	};
+}) satisfies HandleServerError;
+
 
 export const handle: Handle = sequence(user_auth, api, enterprise, theme)

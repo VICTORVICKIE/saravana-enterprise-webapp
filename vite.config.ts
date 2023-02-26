@@ -4,7 +4,7 @@ import type { UserConfig } from 'vite'
 
 const config: UserConfig = {
 	define: {
-		__DATE__: `'${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}'`,
+		__DATE__: `'${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}'`
 	},
 	plugins: [
 		sveltekit(),
@@ -14,8 +14,15 @@ const config: UserConfig = {
 			base: '/',
 			includeAssets: ['fonts/*.*', 'images/*.png'],
 			registerType: 'autoUpdate',
-			workbox: {
-				
+			strategies: 'injectManifest',
+			filename: 'sw.ts',
+			injectManifest: {
+				injectionPoint: undefined
+			},
+			devOptions: {
+				enabled: true,
+				type: 'module',
+				navigateFallback: '/offline'
 			},
 			manifest: {
 				name: 'Saravana Enterprise',
@@ -42,7 +49,7 @@ const config: UserConfig = {
 						purpose: 'any maskable'
 					}
 				]
-			},
+			}
 		})
 	]
 }

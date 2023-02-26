@@ -8,7 +8,7 @@
 	//@ts-ignore
 	let build_date = __DATE__
 
-	console.log(build_date)
+	console.info(build_date)
 	onMount(async () => {
 		if (pwaInfo) {
 			const { registerSW } = await import('virtual:pwa-register')
