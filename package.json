@@ -54,6 +54,7 @@
 		"@prisma/client": "^4.10.1",
 		"daisyui": "^2.47.0",
 		"firebase": "^9.17.1",
+		"firebase-admin": "^11.5.0",
 		"iconify-icon": "^1.0.3"
 	}
 }
