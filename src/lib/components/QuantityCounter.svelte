@@ -7,11 +7,11 @@
 <div class="flex h-10 w-fit flex-row rounded-md">
 	<button
 		aria-label="decrement"
-		class=" h-full w-8 cursor-pointer rounded-l-md outline-none"
+		class="h-full w-8 cursor-pointer rounded-l-md outline-none"
 		disabled={quantity <= 1}
 		on:click={() => quantity--}
 	>
-		<span class="m-auto text-2xl font-thin">−</span>
+		<span class="m-auto text-lg font-thin">−</span>
 	</button>
 	<input
 		type="text"
@@ -28,6 +28,6 @@
 		class=" h-full w-8 cursor-pointer rounded-r-md"
 		on:click={() => quantity++}
 	>
-		<span class="m-auto text-2xl font-thin">+</span>
+		<span class="m-auto text-lg font-thin">+</span>
 	</button>
 </div>

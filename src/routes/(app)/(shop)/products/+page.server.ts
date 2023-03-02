@@ -1,4 +1,4 @@
-import { SECRET_INTERNAL_API_KEY } from '$env/static/private'
+import { PUBLIC_INTERNAL_API_KEY } from '$env/static/public'
 import { ProductKeys } from '$lib/types'
 import type { PageServerLoad } from './$types'
 
@@ -6,7 +6,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 	const get_products = async () => {
 		const res = await fetch('/api/products', {
 			headers: {
-				Authorization: `Bearer ${SECRET_INTERNAL_API_KEY}`
+				Authorization: `Bearer ${PUBLIC_INTERNAL_API_KEY}`
 			}
 		})
 		const data = await res.json()

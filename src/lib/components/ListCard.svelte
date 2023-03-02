@@ -1,7 +1,7 @@
 <script lang="ts">
+	import QuantityCounter from '$lib/components/QuantityCounter.svelte'
 	import { list_items, total } from '$lib/stores/observer'
 	import type { Item } from '$lib/types'
-	import QuantityCounter from './QuantityCounter.svelte'
 
 	export let item: Item
 
@@ -16,9 +16,9 @@
 	}
 </script>
 
-<div class="flex w-full justify-between hover:cursor-default hover:bg-transparent">
-	<div class="flex flex-col md:flex-row">
-		<div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-neutral-focus">
+<div class="relative flex w-full justify-between hover:cursor-default hover:bg-transparent">
+	<div class="flex flex-col items-center gap-2 md:flex-row">
+		<div class=" h-24 w-24  flex-shrink-0 overflow-hidden rounded-md border border-neutral-focus">
 			<img
 				src={item.product.image_url}
 				alt={item.product.name}
@@ -26,15 +26,15 @@
 			/>
 		</div>
 
-		<div class="align-center text-base font-medium">
+		<div class="text-base font-medium">
 			<h3>{item.product.name}</h3>
 		</div>
 	</div>
-	<div class="mt-4 flex items-end justify-between text-sm">
-		<p class="ml-4">₹{item.subtotal}</p>
+	<div class="flex items-center justify-evenly gap-2 text-sm">
 		<QuantityCounter bind:quantity={item.quantity} />
-
-		<div class="flex">
+		<div class="text-md self-center font-bold">₹{item.subtotal}</div>
+		<!-- negative because of padding -->
+		<div class="absolute -top-4 -right-4">
 			<button
 				type="button"
 				on:click={() => {

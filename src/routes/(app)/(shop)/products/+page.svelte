@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { enhance, type SubmitFunction } from '$app/forms'
-	import Alert from '$lib/components/Alert.svelte'
-	import ListCard from '$lib/components/ListCard.svelte'
+	import type { SubmitFunction } from '$app/forms'
 	import ProductCard from '$lib/components/ProductCard.svelte'
-	import { list_items, search_term, state_list, total } from '$lib/stores/observer'
+	import { list_items, search_term, total } from '$lib/stores/observer'
 	import { create_search_store, search_handler } from '$lib/stores/search'
 	import type { Product } from '$lib/types'
 	import { onDestroy } from 'svelte'
