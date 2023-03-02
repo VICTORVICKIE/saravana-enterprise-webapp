@@ -1,30 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { PUBLIC_INTERNAL_API_KEY } from '$env/static/public'
-	import { StateColors, States, type State } from '$lib/constants'
+	import { page } from '$app/stores'
+	import OrderStatusToggleButton from '$lib/components/OrderStatusToggleButton.svelte'
 	import type { Order } from '$lib/types'
 
 	export let order: Order
 
-	export let value: number = States.indexOf(order.state as State)
+	let text: string
+	let color: string
 
-	const submit_state = async () => {
-		const res = await fetch('/api/orders', {
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${PUBLIC_INTERNAL_API_KEY}`,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		})
-	}
-	const goto_order = () => goto(`/enterprise/orders/${order.id}`)
-
-	$: text = States[value]
-	$: color = StateColors[value]
-
-	let order_id: number = order.id
-	$: data = { order_id, value }
+	const goto_order = () => goto(`/orders/${order.id}`)
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -33,17 +18,9 @@
 	<td on:click={goto_order}>{order.user.name}</td>
 	<td on:click={goto_order}>₹{order.total}</td>
 	<td on:click={goto_order}><div class="badge-{color} badge badge-sm w-20 gap-2">{text}</div></td>
-	{#if order.user.role === 'ADMIN'}
+	{#if $page.data.user.role === 'ADMIN'}
 		<td>
-			<input
-				on:change={submit_state}
-				type="range"
-				min="1"
-				max="3"
-				bind:value
-				class="range range-xs align-middle range-{color} w-16"
-				step="1"
-			/>
+			<OrderStatusToggleButton bind:color bind:text {order} />
 		</td>
 	{/if}
 </tr>
