@@ -1,4 +1,4 @@
-import { SECRET_INTERNAL_API_KEY } from '$env/static/private'
+import { PUBLIC_INTERNAL_API_KEY } from '$env/static/public'
 import { pwa_themes } from '$lib/constants'
 import { prisma } from '$lib/server/prisma'
 import type { Handle, HandleServerError } from '@sveltejs/kit'
@@ -38,7 +38,6 @@ const theme: Handle = async ({ event, resolve }) => {
 			if (done) return html
 		}
 	})
-
 	return response
 }
 
@@ -53,11 +52,11 @@ const enterprise: Handle = async ({ event, resolve }) => {
 
 const api: Handle = async ({ event, resolve }) => {
 	let request_auth = event.request.headers.get('authorization')
-	// if (event.url.pathname.startsWith('/api')) {
-	// 	if (!request_auth || (request_auth !== `Bearer ${SECRET_INTERNAL_API_KEY}`)) {
-	// 		throw redirect(303, '/products')
-	// 	}
-	// }
+	if (event.url.pathname.startsWith('/api')) {
+		if (!request_auth || (request_auth !== `Bearer ${PUBLIC_INTERNAL_API_KEY}`)) {
+			throw redirect(303, '/products')
+		}
+	}
 	return await resolve(event)
 }
 

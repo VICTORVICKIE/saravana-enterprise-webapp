@@ -16,6 +16,7 @@ export type Order = {
 	user: User
 	items: Item
 	total: number
+	discount: number
 	state: string
 	ordered_at: string
 	updated_at: string
@@ -26,6 +27,7 @@ export const OrderKeys = [
 	'user',
 	'items',
 	'total',
+	'discount',
 	'state',
 	'ordered_at',
 	'updated_at'

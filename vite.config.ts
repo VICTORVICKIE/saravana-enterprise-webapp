@@ -12,17 +12,12 @@ const config: UserConfig = {
 			srcDir: './src',
 			scope: '/',
 			base: '/',
-			includeAssets: ['fonts/*.*', 'images/*.png'],
+			includeAssets: ['fonts/*.*'],
 			registerType: 'autoUpdate',
 			strategies: 'injectManifest',
 			filename: 'sw.ts',
 			injectManifest: {
 				injectionPoint: undefined
-			},
-			devOptions: {
-				enabled: true,
-				type: 'module',
-				navigateFallback: '/offline'
 			},
 			manifest: {
 				name: 'Saravana Enterprise',

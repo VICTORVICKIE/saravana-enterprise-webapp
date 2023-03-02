@@ -17,6 +17,7 @@ model User {
   name            String
   address         String
   role            String    @default("USER")
+  notify          Boolean   @default(false)
   notify_token    String?   @unique
   hashed_password String
   orders          Order[]
@@ -54,6 +55,7 @@ model Order {
   user       User     @relation(fields: [user_id], references: [id])
   user_id    String
   total      Decimal
+  discount   Decimal  @default(0)
   ordered_at DateTime @default(now())
   updated_at DateTime @updatedAt
   state      State    @default(ORDERED)
