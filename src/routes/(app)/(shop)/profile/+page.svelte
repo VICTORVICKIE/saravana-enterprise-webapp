@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { enhance } from '$app/forms'
 	import { PUBLIC_INTERNAL_API_KEY } from '$env/static/public'
+	import NotificationToggleButton from '$lib/components/NotificationToggleButton.svelte'
 	import { input_validation, paste_validation } from '$lib/validate'
 	import type { PageData } from './$types'
 
@@ -67,7 +67,7 @@
 					<label
 						for="name"
 						on:click={edit}
-						class="{disabled.name ? '' : 'swap-active'} swap-rotate swap"
+						class="{disabled.name ? '' : 'swap-active'} swap swap-rotate"
 					>
 						<iconify-icon
 							class="swap-on pointer-events-none"
@@ -221,6 +221,14 @@
 						/>
 					</label>
 				</div>
+				{#if user.role === 'ADMIN'}
+					<div class="mt-4">
+						<label class="label cursor-pointer">
+							<span class="label-text">Order Notifications</span>
+							<NotificationToggleButton />
+						</label>
+					</div>
+				{/if}
 			</div>
 		</div>
 	</div>
