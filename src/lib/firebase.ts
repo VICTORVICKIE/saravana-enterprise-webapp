@@ -25,10 +25,9 @@ let messaging: Messaging
 let storage: FirebaseStorage
 
 if (browser) {
-	const app: FirebaseApp = initializeApp(firebase_config, "client")
+	const app: FirebaseApp = initializeApp(firebase_config, 'client')
 
 	messaging = getMessaging(app)
 	storage = getStorage(app)
 }
 export { messaging, storage }
-

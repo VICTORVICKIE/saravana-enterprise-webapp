@@ -8,7 +8,6 @@ export type User = {
 	notify_token?: string
 }
 
-
 export const UserKeys = ['id', 'name', 'phone', 'address', 'role', 'notify_token'] as const
 
 export type Order = {

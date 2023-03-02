@@ -13,7 +13,6 @@ export const load: PageServerLoad = async ({ fetch }) => {
 
 		if (data) {
 			data.forEach((product: any) => {
-
 				if (product && typeof product === 'object' && ProductKeys.every((key) => key in product)) {
 					product.id = parseInt(product.id)
 					product.price = parseFloat(product.price)

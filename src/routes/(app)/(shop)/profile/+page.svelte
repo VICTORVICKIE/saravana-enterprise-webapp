@@ -67,7 +67,7 @@
 					<label
 						for="name"
 						on:click={edit}
-						class="{disabled.name ? '' : 'swap-active'} swap swap-rotate"
+						class="{disabled.name ? '' : 'swap-active'} swap-rotate swap"
 					>
 						<iconify-icon
 							class="swap-on pointer-events-none"

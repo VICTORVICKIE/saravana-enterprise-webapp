@@ -62,5 +62,5 @@ export async function hash(pin: string) {
 }
 
 export async function compare(pin: string, pin_hash: string) {
-	return await hash(pin) === pin_hash
+	return (await hash(pin)) === pin_hash
 }

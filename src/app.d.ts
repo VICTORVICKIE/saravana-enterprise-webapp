@@ -21,7 +21,10 @@ declare module 'virtual:pwa-register' {
 		 * @param swScriptUrl The service worker script url.
 		 * @param registration The service worker registration if available.
 		 */
-		onRegisteredSW?: (swScriptUrl: string, registration: ServiceWorkerRegistration | undefined) => void
+		onRegisteredSW?: (
+			swScriptUrl: string,
+			registration: ServiceWorkerRegistration | undefined
+		) => void
 		onRegisterError?: (error: any) => void
 	}
 
@@ -40,5 +43,4 @@ declare global {
 	var prisma: PrismaClient
 }
 
-export { }
-
+export {}

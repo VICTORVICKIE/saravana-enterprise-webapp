@@ -3,7 +3,6 @@ import { prisma } from '$lib/server/prisma'
 import { json, type RequestHandler } from '@sveltejs/kit'
 
 export const GET: RequestHandler = async ({ locals }) => {
-
 	const orders = await prisma.order.findMany({
 		include: {
 			user: {

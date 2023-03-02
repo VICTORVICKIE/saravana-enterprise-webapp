@@ -53,7 +53,7 @@ const enterprise: Handle = async ({ event, resolve }) => {
 const api: Handle = async ({ event, resolve }) => {
 	let request_auth = event.request.headers.get('authorization')
 	if (event.url.pathname.startsWith('/api')) {
-		if (!request_auth || (request_auth !== `Bearer ${PUBLIC_INTERNAL_API_KEY}`)) {
+		if (!request_auth || request_auth !== `Bearer ${PUBLIC_INTERNAL_API_KEY}`) {
 			throw redirect(303, '/products')
 		}
 	}
@@ -61,13 +61,12 @@ const api: Handle = async ({ event, resolve }) => {
 }
 
 export const handleError = (({ error, event }) => {
-	const errorId = crypto.randomUUID();
+	const errorId = crypto.randomUUID()
 	console.log(error)
 	return {
 		message: 'Whoops!',
 		errorId
-	};
-}) satisfies HandleServerError;
-
+	}
+}) satisfies HandleServerError
 
 export const handle: Handle = sequence(user_auth, api, enterprise, theme)

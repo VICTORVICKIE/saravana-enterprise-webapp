@@ -22,7 +22,6 @@ export const GET: RequestHandler = async ({ params }) => {
 		})
 	}
 	return json(orders)
-
 }
 
 export const POST: RequestHandler = async ({ params, request }) => {
@@ -33,7 +32,6 @@ export const POST: RequestHandler = async ({ params, request }) => {
 		const discount = parseFloat(order_data.discount)
 		await prisma.order.update({ data: { discount }, where: { id: order_id } })
 	}
-
 
 	return json({ test: 'test' })
 }

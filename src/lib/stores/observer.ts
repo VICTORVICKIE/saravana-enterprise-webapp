@@ -9,4 +9,9 @@ export const total = writable<number>(0)
 
 export const search_term = writable<string>('')
 
-export const alert = writable<{ status: string, message: string, action: boolean, show: boolean }>({ status: '', message: '', action: false, show: false })
+export const alert = writable<{ status: string; message: string; action: boolean; show: boolean }>({
+	status: '',
+	message: '',
+	action: false,
+	show: false
+})

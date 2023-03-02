@@ -7,7 +7,12 @@ export const POST: RequestHandler = async ({ params, request, locals, cookies })
 
 	const referer = request.headers.get('referer')
 
-	if (typeof params.user_id === 'string' && params.user_id === locals.user.id && referer && referer.includes('profile')) {
+	if (
+		typeof params.user_id === 'string' &&
+		params.user_id === locals.user.id &&
+		referer &&
+		referer.includes('profile')
+	) {
 		if ('pin' in user_data) {
 			await prisma.user.update({
 				data: { hashed_password: await hash(user_data.pin) },
@@ -25,12 +30,9 @@ export const POST: RequestHandler = async ({ params, request, locals, cookies })
 				secure: process.env.NODE_ENV === 'production',
 				maxAge: 60 * 60 * 24 * 30 * 12
 			})
-		}
-
-		else {
+		} else {
 			await prisma.user.update({ data: user_data, where: { phone: locals.user.phone } })
 		}
-
 	}
 	return json({ Test: 'Test' })
 }
