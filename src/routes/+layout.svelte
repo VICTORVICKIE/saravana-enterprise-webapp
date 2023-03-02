@@ -2,11 +2,34 @@
 	import 'iconify-icon'
 	import '../app.css'
 
-	import { onMount, type ComponentType } from 'svelte'
+	import { browser } from '$app/environment'
+	import { goto } from '$app/navigation'
+	import Alert from '$lib/components/Alert.svelte'
+	import { messaging } from '$lib/firebase'
+	import { alert } from '$lib/stores/observer'
+	import { onMessage } from 'firebase/messaging'
+	import { onMount } from 'svelte'
 	import { pwaInfo } from 'virtual:pwa-info'
 
 	//@ts-ignore
 	let build_date = __DATE__
+
+	const channel = new BroadcastChannel('notification-click')
+
+	if (browser) {
+		onMessage(messaging, (payload) => {
+			$alert = {
+				action: false,
+				message: payload.notification?.body as string,
+				show: true,
+				status: 'success'
+			}
+		})
+
+		channel.addEventListener('message', function (event) {
+			goto(event.data)
+		})
+	}
 
 	console.info(build_date)
 	onMount(async () => {
@@ -25,4 +48,9 @@
 	{@html webManifest}
 </svelte:head>
 
-<slot />
+<div class="relative">
+	{#if $alert.show}
+		<Alert content="Test" />
+	{/if}
+	<slot />
+</div>
