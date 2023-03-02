@@ -14,9 +14,8 @@
 	//@ts-ignore
 	let build_date = __DATE__
 
-	const channel = new BroadcastChannel('notification-click')
-
 	if (browser) {
+		const channel = new BroadcastChannel('notification-click')
 		onMessage(messaging, (payload) => {
 			$alert = {
 				action: false,
