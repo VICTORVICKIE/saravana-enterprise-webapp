@@ -83,7 +83,7 @@
 					/>
 					<button type="submit" class="btn-primary btn my-4">Add</button>
 					{#if form?.credentials}
-						<Alert content="Invalid Credentials" />
+						<Alert />
 					{/if}
 				</div>
 			</form>

@@ -11,7 +11,7 @@ const user_auth: Handle = async ({ event, resolve }) => {
 	if (session) {
 		session_data = await prisma.session.findUnique({
 			where: { id: session },
-			select: { user: { select: { id: true, phone: true, role: true, address: true, name: true } } }
+			select: { user: { select: { id: true, phone: true, role: true, address: true, name: true, notify: true, notify_token: true } } }
 		})
 	}
 

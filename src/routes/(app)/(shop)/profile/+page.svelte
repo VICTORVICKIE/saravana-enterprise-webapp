@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/environment'
+	import { invalidateAll } from '$app/navigation'
 	import { PUBLIC_INTERNAL_API_KEY } from '$env/static/public'
 	import NotificationToggleButton from '$lib/components/NotificationToggleButton.svelte'
 	import { input_validation, paste_validation } from '$lib/validate'
@@ -223,9 +225,9 @@
 				</div>
 				{#if user.role === 'ADMIN'}
 					<div class="mt-4">
-						<label class="label cursor-pointer">
+						<label class="label">
 							<span class="label-text">Order Notifications</span>
-							<NotificationToggleButton />
+							<NotificationToggleButton user={data.user} />
 						</label>
 					</div>
 				{/if}

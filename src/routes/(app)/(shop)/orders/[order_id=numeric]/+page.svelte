@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment'
 	import { invalidate, invalidateAll } from '$app/navigation'
 	import { PUBLIC_INTERNAL_API_KEY } from '$env/static/public'
 	import ItemCard from '$lib/components/ItemCard.svelte'
@@ -17,7 +18,7 @@
 
 	$: {
 		disabled.discount = text.toLowerCase() !== 'ordered'
-		invalidateAll()
+		if (browser) invalidateAll()
 	}
 	$: disabled = disabled
 
@@ -88,15 +89,15 @@
 		</table>
 	</div>
 
-	<div class="sticky bottom-0 flex justify-between border border-neutral bg-base-100 p-8 md:px-56">
-		<div class="form-control">
+	<div class="sticky bottom-6 flex justify-between border border-neutral bg-base-100 p-6">
+		<div class="form-control items-center justify-start sm:flex-row">
+			<div class="w-full">Discount ₹</div>
 			<label class="input-group">
-				<span class="bg-transparent">Discount ₹</span>
 				<input
 					name="discount"
 					type="text"
 					disabled={disabled.discount}
-					class="input-bordered input w-24"
+					class="input-bordered input input-xs mt-2 w-24 align-middle sm:ml-2 sm:mt-0"
 					placeholder={data.order.discount !== '0' ? '0' : ''}
 					value={data.order.discount === '0' ? '' : data.order.discount}
 				/>
@@ -120,10 +121,10 @@
 							height="24"
 						/>
 					</label>
-				</div></label
-			>
+				</div>
+			</label>
 		</div>
-		<div class="flex flex-col">
+		<div class="flex flex-col items-center">
 			<h1>Sub Total: {data.order.total}</h1>
 			<h1>Total: {data.order.total - data.order.discount}</h1>
 		</div>

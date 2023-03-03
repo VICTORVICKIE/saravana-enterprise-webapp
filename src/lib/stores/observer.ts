@@ -1,4 +1,4 @@
-import type { Item } from '$lib/types'
+import type { Item, Notify } from '$lib/types'
 import { writable } from 'svelte/store'
 
 export const state_list = writable<boolean>(false)
@@ -9,9 +9,16 @@ export const total = writable<number>(0)
 
 export const search_term = writable<string>('')
 
-export const alert = writable<{ status: string; message: string; action: boolean; show: boolean }>({
+export const alert = writable<Notify>({
 	status: '',
 	message: '',
-	action: false,
-	show: false
+	show: false,
+	duration: 0,
+	action: {
+		type: '',
+		data: {
+			url: '',
+			fxn: () => { }
+		}
+	},
 })

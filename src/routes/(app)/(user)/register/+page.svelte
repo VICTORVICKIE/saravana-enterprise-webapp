@@ -144,10 +144,10 @@
 
 					<button type="submit" class="btn-primary btn my-4">Register</button>
 					{#if form?.phone}
-						<Alert content="User Already Exists" />
+						<Alert />
 					{/if}
 					{#if form?.invalid}
-						<Alert content="Invalid" />
+						<Alert />
 					{/if}
 				</div>
 			</form>

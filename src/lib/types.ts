@@ -5,10 +5,11 @@ export type User = {
 	phone?: string
 	address?: string
 	role: string
-	notify_token?: string
+	notify?: boolean
+	notify_token?: string | undefined | null
 }
 
-export const UserKeys = ['id', 'name', 'phone', 'address', 'role', 'notify_token'] as const
+export const UserKeys = ['id', 'name', 'phone', 'address', 'role', 'notify', 'notify_token'] as const
 
 export type Order = {
 	id: number
@@ -61,3 +62,17 @@ export type Item = {
 }
 
 export const ItemKeys = ['product', 'subtotal', 'quantity'] as const
+
+
+export interface Notify {
+	message: string
+	show: boolean
+	status: string
+	duration: number
+	action: boolean
+	options?: {
+		url: string
+		text: string
+		fxn: () => void
+	}
+}
