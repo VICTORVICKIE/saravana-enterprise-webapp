@@ -57,22 +57,22 @@
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : ''
 
-	async function test() {
-		$alert = {
-			message: 'payload.notification?.body as string',
-			show: true,
-			status: 'success',
-			duration: 2000,
-			action: true,
-			options: {
-				url: '/orders',
-				text: 'Go',
-				fxn: async function () {
-					goto($alert.options?.url as string)
-				}
-			}
-		}
-	}
+	// async function test() {
+	// 	$alert = {
+	// 		message: 'payload.notification?.body as string',
+	// 		show: true,
+	// 		status: 'success',
+	// 		duration: 2500,
+	// 		action: true,
+	// 		options: {
+	// 			url: '/orders',
+	// 			text: 'Go',
+	// 			fxn: async function () {
+	// 				goto($alert.options?.url as string)
+	// 			}
+	// 		}
+	// 	}
+	// }
 </script>
 
 <svelte:head>
@@ -80,7 +80,7 @@
 </svelte:head>
 
 <div class="relative">
-	<input type="checkbox" checked={$alert.show} on:change={test} />
+	<!-- <input type="checkbox" checked={$alert.show} on:change={test} /> -->
 	{#if $alert.show}
 		<Alert />
 	{/if}

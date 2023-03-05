@@ -10,5 +10,5 @@
 		// "**/*.config*":true
 	},
 	"typescript.tsdk": "node_modules\\typescript\\lib",
-	"dotenv.enableAutocloaking": false
+	"dotenv.enableAutocloaking": true
 }
