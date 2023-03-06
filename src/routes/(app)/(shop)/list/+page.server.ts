@@ -44,6 +44,7 @@ const order: Action = async ({ request, locals }) => {
 
 	for (const admin of ADMINS) {
 		if (admin.notify && typeof admin.notify_token === 'string') {
+			console.log(admin.notify_token)
 			const body: Message = {
 				token: admin.notify_token,
 				webpush: {
@@ -61,6 +62,7 @@ const order: Action = async ({ request, locals }) => {
 				}
 			}
 			await messaging.send(body)
+			console.log("sent")
 		}
 	}
 }

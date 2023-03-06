@@ -20,6 +20,7 @@
 
 		// Foreground Notification
 		onMessage(messaging, (payload) => {
+			console.log(payload)
 			$alert = {
 				action: true,
 				duration: 2000,
@@ -39,6 +40,7 @@
 
 		// Background Notification
 		channel.addEventListener('message', function (event) {
+			console.log(event.data)
 			goto(event.data)
 		})
 	}
