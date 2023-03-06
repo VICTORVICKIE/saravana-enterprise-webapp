@@ -16,10 +16,13 @@ const user_auth: Handle = async ({ event, resolve }) => {
 	}
 
 	if (!session_data) {
+		if (session) event.cookies.delete('session')
+
 		event.locals.user = {
 			role: 'GUEST'
 		}
 		return await resolve(event)
+
 	}
 
 	event.locals.user = session_data.user
