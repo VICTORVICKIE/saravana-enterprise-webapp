@@ -18,7 +18,7 @@ model User {
   address         String
   role            String    @default("USER")
   notify          Boolean   @default(false)
-  notify_token    String?   @unique
+  notify_token    String?
   hashed_password String
   orders          Order[]
   session         Session[]

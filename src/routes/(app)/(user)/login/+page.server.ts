@@ -37,7 +37,12 @@ const login: Action = async ({ cookies, request }) => {
 	let session_exists = cookies.get('session')
 
 	if (session_exists) {
-		await prisma.session.delete({ where: { id: session_exists } })
+		try {
+			await prisma.session.delete({ where: { id: session_exists } })
+		}
+		catch (error) {
+			console.error(error)
+		}
 	}
 
 	const session = await prisma.session.create({
