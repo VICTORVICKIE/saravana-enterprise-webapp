@@ -10,15 +10,9 @@ export const total = writable<number>(0)
 export const search_term = writable<string>('')
 
 export const alert = writable<Notify>({
-	status: '',
-	message: '',
-	show: false,
-	duration: 0,
-	action: {
-		type: '',
-		data: {
-			url: '',
-			fxn: () => { }
-		}
-	},
+    status: '',
+    message: '',
+    show: false,
+    duration: 0,
+    action: false
 })

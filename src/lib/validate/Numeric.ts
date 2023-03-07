@@ -1,15 +1,15 @@
 export function numeric(event: KeyboardEvent) {
-	let input = event.target as HTMLInputElement
+    const input = event.target as HTMLInputElement
 
-	switch (input.name) {
-		case 'phone':
-			break
+    switch (input.name) {
+        case 'phone':
+            break
 
-		default:
-			break
-	}
+        default:
+            break
+    }
 
-	if (!/^\d+$/.test(event.key) && event.key !== 'Enter') {
-		event.preventDefault()
-	}
+    if (!/^\d+$/.test(event.key) && event.key !== 'Enter') {
+        event.preventDefault()
+    }
 }

@@ -11,6 +11,8 @@ datasource db {
   relationMode = "prisma"
 }
 
+// This works fine, but more robust way is to use notify_token per browser
+// with a UUID in cookie/local storage per broswer and save token for each.
 model User {
   id              String    @id @default(uuid())
   phone           String    @unique
