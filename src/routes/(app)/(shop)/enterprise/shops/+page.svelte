@@ -12,11 +12,12 @@
             <tr>
                 <th>Shop</th>
                 <th>Address</th>
+                <th />
             </tr>
         </thead>
         <tbody>
-            {#each data.users as user}
-                <ShopCard {user} />
+            {#each data.shops as shop}
+                <ShopCard {shop} />
             {/each}
         </tbody>
     </table>
