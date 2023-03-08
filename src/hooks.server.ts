@@ -1,5 +1,5 @@
 import { PUBLIC_INTERNAL_API_KEY } from '$env/static/public'
-import { pwa_themes } from '$lib/constants'
+import { pwa_themes, SelectUser } from '$lib/constants'
 import { prisma } from '$lib/server/prisma'
 import type { Handle, HandleServerError } from '@sveltejs/kit'
 import { redirect } from '@sveltejs/kit'
@@ -13,15 +13,7 @@ const user_auth: Handle = async ({ event, resolve }) => {
             where: { id: session },
             select: {
                 user: {
-                    select: {
-                        id: true,
-                        phone: true,
-                        role: true,
-                        address: true,
-                        name: true,
-                        notify: true,
-                        notify_token: true
-                    }
+                    select: SelectUser
                 }
             }
         })
