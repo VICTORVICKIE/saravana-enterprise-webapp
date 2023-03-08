@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { PUBLIC_INTERNAL_API_KEY } from '$env/static/public'
     import NotificationToggleButton from '$lib/components/NotificationToggleButton.svelte'
+    import { AUTH_HEADERS } from '$lib/constants'
     import { input_validation, paste_validation } from '$lib/validate'
     import type { PageData } from './$types'
 
@@ -28,10 +28,7 @@
             if (target_value !== user[target]) {
                 const res = await fetch(`/api/users/${user.id}`, {
                     method: 'POST',
-                    headers: {
-                        Authorization: `Bearer ${PUBLIC_INTERNAL_API_KEY}`,
-                        'Content-Type': 'application/json'
-                    },
+                    ...AUTH_HEADERS,
                     body: JSON.stringify({ [target]: target_value })
                 })
             }

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { browser } from '$app/environment'
-    import { PUBLIC_FIREBASE_VAPID_ID, PUBLIC_INTERNAL_API_KEY } from '$env/static/public'
+    import { PUBLIC_FIREBASE_VAPID_ID } from '$env/static/public'
+    import { AUTH_HEADERS } from '$lib/constants'
     import { messaging } from '$lib/firebase'
     import type { User } from '$lib/types'
     import { getToken } from 'firebase/messaging'
@@ -19,10 +20,7 @@
     async function update_notify_config(notify: boolean, notify_token?: string | null) {
         const res = await fetch(`/api/users/${user.id}`, {
             method: 'POST',
-            headers: {
-                Authorization: `Bearer ${PUBLIC_INTERNAL_API_KEY}`,
-                'Content-Type': 'application/json'
-            },
+            ...AUTH_HEADERS,
             body: JSON.stringify({ notify, notify_token })
         })
     }

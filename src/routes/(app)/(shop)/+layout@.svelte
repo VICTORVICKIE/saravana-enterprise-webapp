@@ -1,7 +1,6 @@
 <script lang="ts">
     import { page } from '$app/stores'
     import ThemeToggleButton from '$lib/components/ThemeToggleButton.svelte'
-    import { Roles } from '$lib/constants'
     import { search_term } from '$lib/stores/observer'
     import type { LayoutData } from './$types'
 
@@ -104,21 +103,23 @@
         <label for="toggle-sidebar" class="drawer-overlay" />
         <ul class="menu w-80 bg-base-100 p-4">
             <!-- Sidebar content here -->
-            {#if data.user.role !== Roles[0]}
+            {#if data.user.role !== 'GUEST'}
                 <li>
                     <a on:click={() => (state.sidebar = !state.sidebar)} href="/profile">Profile</a>
                 </li>
-                {#if data.user.role === Roles[2]}
+                {#if data.user.role === 'ADMIN'}
                     <li>
-                        <a on:click={() => (state.sidebar = !state.sidebar)} href="/enterprise/add"
-                            >New Product</a
-                        >
+                        <a on:click={() => (state.sidebar = !state.sidebar)} href="/enterprise/add">
+                            New Product
+                        </a>
                     </li>
                     <li>
                         <a
                             on:click={() => (state.sidebar = !state.sidebar)}
-                            href="/enterprise/users">Shops</a
+                            href="/enterprise/shops"
                         >
+                            Shops
+                        </a>
                     </li>
                 {/if}
                 <li>
