@@ -43,10 +43,10 @@ model Product {
   name         String  @unique
   brand        String
   category     String
-  price        Decimal
+  price        Float
   description  String?
   image_url    String
-  search_terms String?
+  search_terms String
   items        Item[]
 
   @@index([name])
@@ -56,8 +56,8 @@ model Order {
   id         Int      @id @default(autoincrement())
   user       User     @relation(fields: [user_id], references: [id])
   user_id    String
-  total      Decimal
-  discount   Decimal  @default(0)
+  total      Float
+  discount   Float    @default(0)
   ordered_at DateTime @default(now())
   updated_at DateTime @updatedAt
   state      State    @default(ORDERED)
@@ -81,6 +81,7 @@ model Item {
   product    Product @relation(fields: [product_id], references: [id])
   product_id Int
   quantity   Int
+  subtotal   Float
 
   @@index([order_id])
   @@index([product_id])
