@@ -1,27 +1,19 @@
 import { json, type RequestHandler } from '@sveltejs/kit'
 
+import { IncludeShop } from '$lib/constants'
 import { prisma } from '$lib/server/prisma'
+import type { Order } from '$lib/types'
 
 export const GET: RequestHandler = async ({ params }) => {
-    let order_id: number
-    let orders
-    if (params.order_id) {
-        order_id = parseInt(params.order_id)
-        orders = await prisma.order.findUnique({
-            where: { id: order_id },
-            include: {
-                user: {
-                    select: {
-                        phone: true,
-                        name: true,
-                        address: true
-                    }
-                },
-                items: { select: { product: true, quantity: true } }
-            }
-        })
-    }
-    return json(orders)
+
+    const order: Order = await prisma.order.findUnique({
+        where: { id: parseInt(params.order_id as string) },
+        include: {
+            ...IncludeShop,
+            items: { select: { product: true, quantity: true, subtotal: true } }
+        }
+    })
+    return json(order)
 }
 
 export const POST: RequestHandler = async ({ params, request }) => {

@@ -1,15 +1,14 @@
 <script lang="ts">
     import { browser } from '$app/environment'
     import { invalidateAll } from '$app/navigation'
-    import { PUBLIC_INTERNAL_API_KEY } from '$env/static/public'
     import ItemCard from '$lib/components/ItemCard.svelte'
     import OrderStatusToggleButton from '$lib/components/OrderStatusToggleButton.svelte'
-    import type { Item } from '$lib/types'
+    import { AUTH_HEADERS, OrderStates } from '$lib/constants'
     import type { PageData } from './$types'
 
     export let data: PageData
 
-    let color = ''
+    let color = OrderStates.get(data.order.state)?.color as string
     let text: string = data.order.state
 
     let disabled = {
@@ -17,7 +16,7 @@
     }
 
     $: {
-        disabled.discount = text.toLowerCase() !== 'ordered'
+        disabled.discount = text.toLowerCase() !== 'ordered' || data.user.role !== 'ADMIN'
         if (browser) invalidateAll()
     }
     $: disabled = disabled
@@ -25,11 +24,6 @@
     let state = {
         discount: false
     }
-    let items: Item[] = data.order.items.map((item: Item) => ({
-        product: item.product,
-        subtotal: item.product.price * item.quantity,
-        quantity: item.quantity
-    }))
 
     async function set_discount(event: Event) {
         const target = (event.target as HTMLLabelElement).htmlFor
@@ -41,10 +35,7 @@
             }
             const res = await fetch(`/api/orders/${data.order.id}`, {
                 method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${PUBLIC_INTERNAL_API_KEY}`,
-                    'Content-Type': 'application/json'
-                },
+                ...AUTH_HEADERS,
                 body: JSON.stringify({ [target]: input.value })
             })
         }
@@ -61,9 +52,11 @@
         </div>
         <div class="flex flex-col">
             <div class="badge-{color} badge badge-sm w-20 gap-2">{text}</div>
-            <div class="mx-auto">
-                <OrderStatusToggleButton bind:color bind:text order={data.order} />
-            </div>
+            {#if data.user.role === 'ADMIN'}
+                <div class="mx-auto">
+                    <OrderStatusToggleButton bind:color bind:text order={data.order} />
+                </div>
+            {/if}
         </div>
     </div>
 
@@ -79,7 +72,7 @@
                 </tr>
             </thead>
             <tbody>
-                {#each items as item}
+                {#each data.order.items as item}
                     <ItemCard {item} />
                 {/each}
             </tbody>
@@ -95,30 +88,32 @@
                     type="text"
                     disabled={disabled.discount}
                     class="input-bordered input input-xs mt-2 w-24 align-middle sm:ml-2 sm:mt-0"
-                    placeholder={data.order.discount !== '0' ? '0' : ''}
-                    value={data.order.discount === '0' ? '' : data.order.discount}
+                    placeholder={data.order.discount !== 0 ? '0' : ''}
+                    value={data.order.discount === 0 ? '' : data.order.discount}
                 />
-                <div class="ml-3 flex items-center">
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <label
-                        for="discount"
-                        on:click={set_discount}
-                        class="{state.discount ? '' : 'swap-active'} swap-rotate swap"
-                    >
-                        <iconify-icon
-                            class="swap-on pointer-events-none"
-                            icon="ph:check-duotone"
-                            width="24"
-                            height="24"
-                        />
-                        <iconify-icon
-                            class="swap-off pointer-events-none"
-                            icon="ph:x-duotone"
-                            width="24"
-                            height="24"
-                        />
-                    </label>
-                </div>
+                {#if data.user.role === 'ADMIN'}
+                    <div class="ml-3 flex items-center">
+                        <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <label
+                            for="discount"
+                            on:click={set_discount}
+                            class="{state.discount ? '' : 'swap-active'} swap-rotate swap"
+                        >
+                            <iconify-icon
+                                class="swap-on pointer-events-none"
+                                icon="ph:check-duotone"
+                                width="24"
+                                height="24"
+                            />
+                            <iconify-icon
+                                class="swap-off pointer-events-none"
+                                icon="ph:x-duotone"
+                                width="24"
+                                height="24"
+                            />
+                        </label>
+                    </div>
+                {/if}
             </label>
         </div>
         <div class="flex flex-col items-center">
