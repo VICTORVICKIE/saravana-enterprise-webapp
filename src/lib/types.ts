@@ -1,3 +1,5 @@
+import type { OrderStates } from "$lib/constants"
+
 export type User = {
     [key: string]: unknown
     id?: string
@@ -28,7 +30,7 @@ export type Order = {
     updated_at: string
 }
 
-export type State = 'PENDING' | 'CANCELLED' | 'ORDERED' | 'DELIVERED'
+export type State = (typeof OrderStates)[number]
 
 export type Product = {
     id: number

@@ -14,12 +14,14 @@ export const AlertStates = new Map([
     ['error', { icon: 'ph:x-circle-duotone', color: 'text-error' }]
 ]) as Map<string, Record<string, string>>
 
-export const OrderStates = new Map([
-    ['PENDING', { index: 0, color: 'neutral' }],
-    ['CANCELLED', { index: 1, color: 'error' }],
-    ['ORDERED', { index: 2, color: 'info' }],
-    ['DELIVERED', { index: 3, color: 'success' }]
-]) as Map<string, Record<string, string | number>>
+export const OrderStates = ['PENDING', 'CANCELLED', 'ORDERED', 'DELIVERED'] as const
+
+export const OrderStatesColor = new Map([
+    ['PENDING', 'neutral'],
+    ['CANCELLED', 'error'],
+    ['ORDERED', 'info'],
+    ['DELIVERED', 'success']
+]) as Map<string, string>
 
 
 export const AUTH_HEADERS = {

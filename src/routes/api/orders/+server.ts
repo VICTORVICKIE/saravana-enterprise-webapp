@@ -15,9 +15,7 @@ export const GET: RequestHandler = async ({ locals }) => {
 export const POST: RequestHandler = async ({ request }) => {
     const order_data = await request.json()
 
-    const order_state = States[order_data.value]
-
-    await prisma.order.update({ where: { id: order_data.order_id }, data: { state: order_state } })
+    await prisma.order.update({ where: { id: order_data.order_id }, data: { state: order_data.state } })
 
     return json({ Test: 'Test' })
 }

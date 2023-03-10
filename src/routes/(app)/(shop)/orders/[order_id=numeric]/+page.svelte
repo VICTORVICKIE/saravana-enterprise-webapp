@@ -3,20 +3,22 @@
     import { invalidateAll } from '$app/navigation'
     import ItemCard from '$lib/components/ItemCard.svelte'
     import OrderStatusToggleButton from '$lib/components/OrderStatusToggleButton.svelte'
-    import { AUTH_HEADERS, OrderStates } from '$lib/constants'
+    import { AUTH_HEADERS, OrderStates, OrderStatesColor } from '$lib/constants'
+    import type { State } from '$lib/types'
     import type { PageData } from './$types'
 
     export let data: PageData
 
-    let color = OrderStates.get(data.order.state)?.color as string
-    let text: string = data.order.state
+    let value: number = OrderStates.indexOf(data.order.state as State)
+    $: state_text = OrderStates[value]
+    $: color = OrderStatesColor.get(state_text) as string
 
     let disabled = {
         discount: false
     }
 
     $: {
-        disabled.discount = text.toLowerCase() !== 'ordered' || data.user.role !== 'ADMIN'
+        disabled.discount = state_text.toLowerCase() !== 'ordered' || data.user.role !== 'ADMIN'
         if (browser) invalidateAll()
     }
     $: disabled = disabled
@@ -51,10 +53,14 @@
             <h1>Phone: {data.order.user.phone}</h1>
         </div>
         <div class="flex flex-col">
-            <div class="badge-{color} badge badge-sm w-20 gap-2">{text}</div>
+            <div class="badge-{color} badge badge-sm w-20 gap-2">{state_text}</div>
             {#if data.user.role === 'ADMIN'}
                 <div class="mx-auto">
-                    <OrderStatusToggleButton bind:color bind:text order={data.order} />
+                    <OrderStatusToggleButton
+                        bind:color
+                        bind:state={state_text}
+                        order={data.order}
+                    />
                 </div>
             {/if}
         </div>
