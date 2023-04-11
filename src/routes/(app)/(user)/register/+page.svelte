@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { enhance } from '$app/forms'
+    import { applyAction, enhance, type SubmitFunction } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
+    import { loading } from '$lib/stores/observer'
     import { input_validation, paste_validation } from '$lib/validate'
     import type { ActionData } from './$types'
 
@@ -10,13 +11,27 @@
     }
 
     export let form: ActionData
+
+    const register: SubmitFunction = async ({ form }) => {
+        $loading = true
+        return async ({ result, update }) => {
+            // if (result.type === 'success') {
+            //     form.reset()
+            // }
+            // if (result.type === 'failure') {
+            //     await applyAction(result)
+            // }
+            await update()
+            $loading = false
+        }
+    }
 </script>
 
 <div class="flex flex-1 justify-center bg-base-200">
     <div class="my-auto flex-row-reverse">
         <div class="w-full bg-base-100 px-12 py-8">
             <!-- svelte-ignore a11y-label-has-associated-control -->
-            <form method="POST" action="?/register" use:enhance>
+            <form method="POST" action="?/register" use:enhance={register}>
                 <div class="grid grid-cols-1">
                     <h1 class="mb-4 text-center text-2xl">Register</h1>
                     <!-- Name -->

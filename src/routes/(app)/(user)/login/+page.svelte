@@ -1,20 +1,23 @@
 <script lang="ts">
     import { applyAction, enhance, type SubmitFunction } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
+    import { loading } from '$lib/stores/observer'
     import { input_validation, paste_validation } from '$lib/validate'
     import type { ActionData } from './$types'
 
     let state = { pin: false }
 
-    export const form_validation: SubmitFunction = async ({ form }) => {
+    export const login: SubmitFunction = async ({ form }) => {
+        $loading = true
         return async ({ result, update }) => {
-            if (result.type === 'success') {
-                form.reset()
-            }
-            if (result.type === 'failure') {
-                await applyAction(result)
-            }
+            // if (result.type === 'success') {
+            //     form.reset()
+            // }
+            // if (result.type === 'failure') {
+            //     await applyAction(result)
+            // }
             await update()
+            $loading = false
         }
     }
 
@@ -25,7 +28,7 @@
     <div class="my-auto flex-row-reverse">
         <div class="w-full bg-base-100 p-12">
             <!-- svelte-ignore a11y-label-has-associated-control -->
-            <form method="POST" action="?/login" use:enhance>
+            <form method="POST" action="?/login" use:enhance={login}>
                 <div class="grid grid-cols-1 gap-1">
                     <h1 class="mb-4 text-center text-2xl">Login</h1>
                     <label class="label">

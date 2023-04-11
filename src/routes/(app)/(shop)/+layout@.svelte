@@ -1,7 +1,8 @@
 <script lang="ts">
+    import { enhance, type SubmitFunction } from '$app/forms'
     import { page } from '$app/stores'
     import ThemeToggleButton from '$lib/components/ThemeToggleButton.svelte'
-    import { search_term } from '$lib/stores/observer'
+    import { loading, search_term } from '$lib/stores/observer'
     import type { LayoutData } from './$types'
 
     export let data: LayoutData
@@ -25,6 +26,14 @@
             ? search_group.classList.remove('hidden')
             : search_group.classList.add('hidden')
         search_group.querySelector('input')?.focus()
+    }
+
+    const logout: SubmitFunction = async () => {
+        $loading = true
+        return async ({ update }) => {
+            await update()
+            $loading = false
+        }
     }
 </script>
 
@@ -126,7 +135,7 @@
                     <a on:click={() => (state.sidebar = !state.sidebar)} href="/orders">Orders</a>
                 </li>
                 <li>
-                    <form action="/logout" method="POST">
+                    <form action="/logout" method="POST" use:enhance={logout}>
                         <button
                             class="w-full text-start"
                             on:click={() => (state.sidebar = !state.sidebar)}

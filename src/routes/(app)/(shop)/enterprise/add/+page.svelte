@@ -2,6 +2,7 @@
     import { enhance, type SubmitFunction } from '$app/forms'
     import Alert from '$lib/components/Alert.svelte'
     import { storage } from '$lib/firebase'
+    import { loading } from '$lib/stores/observer'
     import type { StorageReference } from 'firebase/storage'
     import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
     import type { ActionData } from './$types'
@@ -14,6 +15,7 @@
     }
 
     const add_product: SubmitFunction = async ({ data }) => {
+        $loading = true
         const image = files[0]
 
         const image_ref = ref(storage, image.name)
@@ -22,6 +24,7 @@
 
         return async ({ update }) => {
             await update()
+            $loading = false
         }
     }
     export let form: ActionData
