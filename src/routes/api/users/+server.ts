@@ -8,7 +8,7 @@ import type { Shop } from '$lib/types'
 export const GET: RequestHandler = async () => {
     const shops: Shop[] = await prisma.user.findMany({
         where: { role: 'USER' },
-        select: SelectShop,
+        select: SelectShop
     })
 
     return json(shops)

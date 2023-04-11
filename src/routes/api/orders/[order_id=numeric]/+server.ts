@@ -5,7 +5,6 @@ import { prisma } from '$lib/server/prisma'
 import type { Order } from '$lib/types'
 
 export const GET: RequestHandler = async ({ params }) => {
-
     const order: Order = await prisma.order.findUnique({
         where: { id: parseInt(params.order_id as string) },
         include: {

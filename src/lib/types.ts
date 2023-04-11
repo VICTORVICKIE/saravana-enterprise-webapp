@@ -1,4 +1,4 @@
-import type { OrderStates } from "$lib/constants"
+import type { OrderStates } from '$lib/constants'
 
 export type User = {
     [key: string]: unknown
@@ -48,7 +48,6 @@ export type Item = {
     subtotal: number
     quantity: number
 }
-
 
 export interface Notify {
     message: string

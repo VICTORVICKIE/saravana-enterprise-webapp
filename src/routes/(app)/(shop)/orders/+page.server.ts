@@ -5,7 +5,7 @@ import type { PageServerLoad } from './$types'
 export const load: PageServerLoad = async ({ fetch }) => {
     const get_orders = async () => {
         const res = await fetch('/api/orders', AUTH_HEADERS)
-        const data = await res.json() as Order[]
+        const data = (await res.json()) as Order[]
 
         if (data) {
             for (const order of data) {

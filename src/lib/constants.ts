@@ -23,7 +23,6 @@ export const OrderStatesColor = new Map([
     ['DELIVERED', 'success']
 ]) as Map<string, string>
 
-
 export const AUTH_HEADERS = {
     headers: {
         Authorization: `Bearer ${PUBLIC_INTERNAL_API_KEY}`

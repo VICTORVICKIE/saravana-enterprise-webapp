@@ -6,7 +6,7 @@
 
     export let color: string
     export let state: string
-    
+
     let order_id: number = order.id
     let value: number = OrderStates.indexOf(order.state as State)
 
@@ -20,7 +20,7 @@
 
     $: state = OrderStates[value]
     $: color = OrderStatesColor.get(state) as string
-    
+
     $: data = { order_id, state }
 </script>
 

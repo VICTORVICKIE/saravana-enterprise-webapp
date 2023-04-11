@@ -88,7 +88,7 @@
     {#if $alert.show}
         <Alert />
     {/if}
-    
+
     {#if $loading}
         <div class="absolute z-50 h-full w-full ">
             <iconify-icon
