@@ -1,4 +1,4 @@
-import { States } from '$lib/constants'
+import { SelectShop } from '$lib/constants'
 import { messaging } from '$lib/server/firebase'
 import { prisma } from '$lib/server/prisma'
 import type { Item } from '$lib/types'
@@ -21,9 +21,9 @@ const order: Action = async ({ request, locals }) => {
         data: {
             user: { connect: { id: locals.user.id } },
             total,
-            state: States[2]
+            state: 'ORDERED'
         },
-        include: { user: { select: { address: true, phone: true, name: true, role: true } } }
+        include: { user: { select: SelectShop } }
     })
 
     // Populating Item Table
@@ -32,7 +32,8 @@ const order: Action = async ({ request, locals }) => {
             data: {
                 order: { connect: { id: user_order.id } },
                 product: { connect: { id: item.product.id } },
-                quantity: item.quantity
+                quantity: item.quantity,
+                subtotal: item.quantity * item.product.price
             }
         })
     }

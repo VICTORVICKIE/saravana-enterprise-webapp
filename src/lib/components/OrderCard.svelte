@@ -2,12 +2,15 @@
     import { goto } from '$app/navigation'
     import { page } from '$app/stores'
     import OrderStatusToggleButton from '$lib/components/OrderStatusToggleButton.svelte'
-    import type { Order } from '$lib/types'
+    import { OrderStates, OrderStatesColor } from '$lib/constants'
+    import type { Order, State } from '$lib/types'
 
     export let order: Order
 
-    let text: string
-    let color: string
+    let value: number = OrderStates.indexOf(order.state as State)
+
+    $: state = OrderStates[value]
+    $: color = OrderStatesColor.get(state) as string
 
     const goto_order = () => goto(`/orders/${order.id}`)
 </script>
@@ -17,10 +20,11 @@
     <td on:click={goto_order}>{order.id}</td>
     <td on:click={goto_order}>{order.user.name}</td>
     <td on:click={goto_order}>₹{order.total}</td>
-    <td on:click={goto_order}><div class="badge-{color} badge badge-sm w-20 gap-2">{text}</div></td>
+    <td on:click={goto_order}><div class="badge-{color} badge badge-sm w-20 gap-2">{state}</div></td
+    >
     {#if $page.data.user.role === 'ADMIN'}
         <td>
-            <OrderStatusToggleButton bind:color bind:text {order} />
+            <OrderStatusToggleButton bind:color bind:state {order} />
         </td>
     {/if}
 </tr>

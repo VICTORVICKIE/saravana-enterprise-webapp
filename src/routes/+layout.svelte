@@ -4,13 +4,13 @@
 
     import { browser } from '$app/environment'
     import { goto } from '$app/navigation'
+    import { navigating } from '$app/stores'
     import Alert from '$lib/components/Alert.svelte'
     import { messaging } from '$lib/firebase'
-    import { alert } from '$lib/stores/observer'
+    import { alert, loading } from '$lib/stores/observer'
     import { onMessage } from 'firebase/messaging'
     import { onMount } from 'svelte'
     import { pwaInfo } from 'virtual:pwa-info'
-
     /* global __DATE__ */
     // @ts-expect-error defined @ build
     let build_date = __DATE__
@@ -59,6 +59,8 @@
 
     $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : ''
 
+    $: $loading = $navigating ? true : false
+
     // async function test() {
     // 	$alert = {
     // 		message: 'payload.notification?.body as string',
@@ -82,9 +84,22 @@
 </svelte:head>
 
 <div class="relative">
-    <!-- <input type="checkbox" checked={$alert.show} on:change={test} /> -->
+    <!-- <input type="checkbox" bind:checked={$loading} /> -->
     {#if $alert.show}
         <Alert />
     {/if}
-    <slot />
+
+    {#if $loading}
+        <div class="absolute z-50 h-full w-full ">
+            <iconify-icon
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                width="96"
+                icon="eos-icons:bubble-loading"
+            />
+        </div>
+    {/if}
+
+    <div class:opacity-50={$loading}>
+        <slot />
+    </div>
 </div>

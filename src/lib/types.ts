@@ -1,45 +1,36 @@
+import type { OrderStates } from '$lib/constants'
+
 export type User = {
     [key: string]: unknown
     id?: string
     name?: string
     phone?: string
     address?: string
-    role: string
+    role: Role
     notify?: boolean
     notify_token?: string | undefined | null
 }
 
-export const UserKeys = [
-    'id',
-    'name',
-    'phone',
-    'address',
-    'role',
-    'notify',
-    'notify_token'
-] as const
+export type Role = 'GUEST' | 'USER' | 'ADMIN'
+
+export type Shop = {
+    name?: string
+    phone?: string
+    address?: string
+}
 
 export type Order = {
     id: number
     user: User
-    items: Item
+    items: Item[]
     total: number
     discount: number
-    state: string
+    state: State
     ordered_at: string
     updated_at: string
 }
 
-export const OrderKeys = [
-    'id',
-    'user',
-    'items',
-    'total',
-    'discount',
-    'state',
-    'ordered_at',
-    'updated_at'
-] as const
+export type State = (typeof OrderStates)[number]
 
 export type Product = {
     id: number
@@ -52,24 +43,11 @@ export type Product = {
     search_terms: string
 }
 
-export const ProductKeys = [
-    'id',
-    'name',
-    'brand',
-    'category',
-    'price',
-    'description',
-    'image_url',
-    'search_terms'
-] as const
-
 export type Item = {
     product: Product
     subtotal: number
     quantity: number
 }
-
-export const ItemKeys = ['product', 'subtotal', 'quantity'] as const
 
 export interface Notify {
     message: string

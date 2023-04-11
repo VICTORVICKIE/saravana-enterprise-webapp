@@ -1,11 +1,10 @@
-import { Roles } from '$lib/constants'
 import { prisma } from '$lib/server/prisma'
 import { redirect } from '@sveltejs/kit'
 import type { Actions } from './$types'
 
 export const actions: Actions = {
     async default({ cookies, locals }) {
-        if (locals.user.role === Roles[0]) {
+        if (locals.user.role === 'GUEST') {
             throw redirect(302, '/login')
         }
 

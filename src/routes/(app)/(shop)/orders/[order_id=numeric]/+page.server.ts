@@ -1,14 +1,11 @@
-import { PUBLIC_INTERNAL_API_KEY } from '$env/static/public'
+import { AUTH_HEADERS } from '$lib/constants'
+import type { Order } from '$lib/types'
 import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async ({ fetch, params }) => {
     const get_order = async (order_id: string) => {
-        const res = await fetch(`/api/orders/${order_id}`, {
-            headers: {
-                Authorization: `Bearer ${PUBLIC_INTERNAL_API_KEY}`
-            }
-        })
-        const data = await res.json()
+        const res = await fetch(`/api/orders/${order_id}`, AUTH_HEADERS)
+        const data = (await res.json()) as Order
 
         return data
     }
