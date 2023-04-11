@@ -16,3 +16,5 @@ export const alert = writable<Notify>({
     duration: 0,
     action: false
 })
+
+export const loading = writable<boolean>(false)
